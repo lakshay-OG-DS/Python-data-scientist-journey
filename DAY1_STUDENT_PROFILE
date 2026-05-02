@@ -1,0 +1,26 @@
+# Day 1: Python Basics for Data Science
+name = "Lakshay" # Apna naam
+birth_year = 2009
+grade = 98.57
+enrolled = True
+course = " Data Science "
+
+# Age nikal
+age = 2026 - birth_year
+
+# String saaf kar
+clean_course = course.strip().title()
+
+# f-string se report
+print(f"--- Student Report ---")
+print(f"Name: {name}")
+print(f"Age: {age}")
+print(f"Grade: {grade}%")
+print(f"Course: {clean_course}")
+print(f"Enrolled: {enrolled}")
+
+# Data types check
+print(f"\n--- Data Types ---")
+print(f"age is {type(age)}")
+print(f"grade is {type(grade)}")
+print(f"enrolled is {type(enrolled)}")
