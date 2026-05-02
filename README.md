@@ -1,6 +1,5 @@
 # Python-data-scientist-journey
-Hey I'm going to become a data scientist 
-# Python for Data Science Journey
+I'm going to become a data scientist
 
 Hi, I'm Lakshay from India. Goal: $100K+ Remote US Data Scientist role.
 
