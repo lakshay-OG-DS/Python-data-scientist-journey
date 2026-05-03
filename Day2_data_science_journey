@@ -1,0 +1,75 @@
+scores = [50,70,80,90,99,89,70,90,98]
+print(min(scores))           
+
+print(max(scores))    
+
+avg = sum(scores) // len(scores)
+
+print(avg)   
+      
+for score in scores:
+	if score > 80:
+		print(score)
+
+td = [ score for score in scores if score > 70 ]
+print(td)
+
+celcius = [58,60,100,30]
+
+fehrenheite = [ c * 9/5 + 32 for c in celcius]
+name_list = []
+print(fehrenheite)
+
+name = ['alice:23','bob:32']
+
+for item in name:
+	part = item.split(":")
+	key = part[0]
+	name_list.append(key)
+	val = part[1]
+	print(key)
+	print(val)
+	print(name_list)
+	
+matrix = [
+[1,2,3],
+[4,5,6],
+[7,8,9]
+]
+
+print(matrix[1][1])
+
+
+# grade analyzer 
+
+grades = ["alice:70","bob:90","king:23","ronaldo:99"]
+
+# find average topper and student who passed >=60
+
+# name and marks
+name = [ ]
+marks = [ ]
+
+for g in grades:
+	n , m = g.split(":")
+	name.append(n)
+	marks.append(int(m))
+print(name)
+print(marks)
+
+# now avg marks
+
+avg = sum(marks)/len(grades)
+print(avg)
+
+# now top marks
+
+print(max(marks))
+
+# now passed
+
+print("those who passed: ")
+
+for i in range(len(name)):
+	if marks[i] >= 60:
+		print(name[i],marks[i])
