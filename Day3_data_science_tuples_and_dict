@@ -1,0 +1,67 @@
+#  TASK 1 — Student Tuple
+tup = ("lakshay", 67, "himachal_pradesh", 67.67)
+print("Full Tuple:", tup)
+
+
+#  TASK 2 — Unpacking
+name, age, city, gpa = tup
+
+print("Name:", name)
+print("Age:", age)
+print("City:", city)
+print("GPA:", gpa)
+
+
+#  TASK 3 — Function (min, max, average)
+nums = [10, 20, 30, 40]
+
+def calc(nums):
+    return min(nums), max(nums), sum(nums)/len(nums)
+
+mn, mx, avg = calc(nums)
+
+print("Min:", mn)
+print("Max:", mx)
+print("Average:", avg)
+
+
+#  TASK 4 — Student Scores (Sorting + Max/Min)
+students = [
+    ("A", 90),
+    ("B", 80),
+    ("C", 95),
+    ("D", 70),
+    ("E", 85)
+]
+
+# Sort by score
+sorted_students = sorted(students, key=lambda x: x[1])
+print("Sorted Students:", sorted_students)
+
+# Highest scorer
+top = max(students, key=lambda x: x[1])
+print("Top Student:", top)
+
+# Lowest scorer
+lowest = min(students, key=lambda x: x[1])
+print("Lowest Student:", lowest)
+
+
+count = {"china": 52817,"india":62826,"usa":767}
+max_pop = (max(count, key = count.get))
+print(max_pop)
+print(count[max_pop])
+
+phonebook = {
+    "Arjun": "98765-43210",
+    "Priya": "87654-32109", 
+    "Rohan": "76543-21098",
+    "Sneha": "65432-10987",
+    "Vikram": "54321-09876"
+}
+name = input("the name : ")
+if name not in phonebook:
+	print("contact not found")
+else:
+	print(phonebook[name])
+
