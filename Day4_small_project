@@ -1,3 +1,4 @@
+#bank loan
 # components 
 age = 23
 income = 50000
@@ -10,4 +11,19 @@ elif age >= 18 and income < 7000:
 	print("under consultation")
 else:
 	print("denied")
-	
+# GRADE CALC
+# components 
+marks = 13
+# statements
+if marks > 100 or marks < 0:
+	print("invalid")
+elif marks >= 90:
+	print("passed and A+ grade")
+elif  marks >= 70:
+	print("passed and A grade")
+elif marks >= 50:
+	print(" passed but B grade")
+elif marks >= 0:
+	print("failed ")
+else:
+	print("invalid marks")
