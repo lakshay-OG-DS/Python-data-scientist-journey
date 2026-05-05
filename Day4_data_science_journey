@@ -1,0 +1,53 @@
+# sets for today
+emails = ["a@gmail.com", "b@gmail.com", "a@gmail.com", "c@gmail.com", "b@gmail.com"]
+unique_em = set(emails)
+print(unique_em)
+
+a = {1,2,3,4,5,6,7,8,9,10} 
+b = {5,6,7,8,9,10,11,12,13,14,15}
+union = a | b
+print(union)
+intersect =a & b
+print(intersect)
+diff = a - b
+print(diff)
+opp_diff = b - a
+print(opp_diff)
+sub = (a).issubset(b) or (a)<=(b)
+print(sub)
+print(set(a))
+
+math_students = {"Asha", "Ben", "Cara"}  
+science_students = {"Ben", "Cara", "Dan"}
+
+print(set("Asha"))
+unique =math_students | science_students
+print(unique)
+
+common = math_students & science_students
+print(common)
+
+one_class = math_students - science_students
+print(one_class)
+
+either = (math_students-science_students) | (science_students - math_students)
+print(either)
+
+fruits = {"apple", "banana", "orange"}
+
+#  How to check I forgot maybe
+
+if "mango" in fruits:
+	print("yes mango")
+else:
+	print(" ni hao ")
+
+fruits.add("mango")
+print(fruits)
+
+fruits.remove("banana")
+print(fruits)
+
+
+numbers = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+evens = {2, 4, 6, 8, 10}
