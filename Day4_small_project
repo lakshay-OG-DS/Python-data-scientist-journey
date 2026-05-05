@@ -35,6 +35,7 @@ for num in range(1,101):
 		print("fizz")
 	elif num % 5 == 0:
 		print("buzz")
+
 	else:
 		print(num)
 
@@ -45,3 +46,28 @@ for nums in range(1,1000):
 		if nums % 2 == 0:
 			total =total+ nums
 print(total)
+
+# mini projects
+vals = [10,20,282,60,89]
+for val in vals:
+	if val > 40:
+		print(val)
+		break
+
+inp = (int(input("enter your num:  ")))
+for i in range(inp):
+	for j in range(i):
+		print("*",end=" ")
+	print( )
+	
+valu = [1,2,3,4,5,6,7,8,9]
+for va in valu:
+	if va % 2 != 0:
+		print(va)
+		continue
+		
+count = 0
+while count <= 5:
+		print(count)
+		count += 1
+	
