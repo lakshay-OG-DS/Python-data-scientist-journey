@@ -1,0 +1,92 @@
+data = [0.000000001,10,20,30,40,299999]
+	
+def mean(data):
+	result = [ ]
+	mean = sum(data)/len(data)
+	result.append(mean)
+	return result
+print(mean(data))
+print(max(data))
+print(min(data))
+
+
+def bmi(height,weight):
+	value = weight/(height)**2
+	
+	if value < 18.5:
+		print("under weight")
+	elif value < 20:
+		print("normal")
+	elif value < 40:
+		print("over weight")
+	else:
+		print("obese")
+	return value
+print(bmi(1.73,45))
+
+def nums(*args):
+	result = [ ]
+	for n in args:
+			if n % 2 == 0:
+				result.append(n)
+	return result
+print(nums(17,8,86,62,2,3,4,5,6,7,8,9,68))
+		
+names = ["calice","bob","afro"]
+
+print(sorted(names))
+
+# lets level up a bit  as id
+id ={"alice":60,"bob":63,"afro":89}
+print(sorted(id.items() , key = lambda  x: x[1]))
+
+
+# cache
+def make_cache():
+	cache = {}
+	
+	def calc(n):
+		if n in cache:
+			print("from cache")
+			return cache
+			
+		print("calculating")
+		result = n * n
+		cache[n] = result
+		return result
+		
+	return calc
+
+square = (make_cache())
+
+print(square(4))
+print(square(4))
+
+# here comes greatest one
+def stats(marks):
+    
+    # Mean
+    mean = sum(marks) / len(marks)
+
+    # Median
+    sorted_marks = sorted(marks)
+    n = len(sorted_marks)
+
+    if n % 2 == 1:
+        median = sorted_marks[n // 2]
+    else:
+        median = (sorted_marks[n // 2 - 1] + sorted_marks[n // 2]) / 2
+
+    # Max & Min
+    maximum = max(marks)
+    minimum = min(marks)
+
+    return mean, median, maximum, minimum
+
+
+marks = [45, 67, 89, 56, 78]
+
+result = stats(marks)
+
+print("Mean, Median, Max, Min:")
+print(result)
