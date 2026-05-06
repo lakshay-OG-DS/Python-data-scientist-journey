@@ -1,0 +1,26 @@
+marks = [40, 50, 70, 50, 79]
+
+def normalize(marks):
+    result = []
+    mean = sum(marks) / len(marks)
+    for _ in marks:
+        result.append(mean)
+    return result
+
+print(normalize(marks))
+
+
+data = [40, 50, 70, 50, 79]
+
+def standardize(data):
+    result = []
+    
+    mean = sum(data) / len(data)
+    variance = sum((x - mean)**2 for x in data) / len(data)
+    std = variance ** 0.5
+
+    for x in data:
+        value = (x - mean) / std
+        result.append(value)
+
+    return result
