@@ -1,0 +1,47 @@
+class character:
+
+		def __init__(self,name,hp,attack):
+			self.name = name
+			self.hp = hp
+			self.attack = attack
+			
+		def show_stats(self):
+			print("-------")
+			print("name",self.name)
+			print("hp",self.hp)
+			print("attack",self.attack)
+			
+		def attack_enemy(self,enemy):
+				print(self.name, "attacks",enemy.name)
+				enemy.hp -= self.attack
+				
+				print(enemy.name,"losses",self.attack,"Hp")
+				
+				if enemy.hp < 0:
+					enemy.hp = 0
+					
+				print(enemy.name,"hp is now",enemy.hp)
+				print()
+
+naruto = character("Naruto",100,32)
+sasuke = character("Sasuke",100,30)
+goku = character("goku",222222,1111111)
+
+
+naruto.show_stats()
+sasuke.show_stats()
+
+naruto.attack_enemy(goku)
+sasuke.attack_enemy(goku)
+naruto.attack_enemy(goku)
+sasuke.attack_enemy(goku)
+naruto.attack_enemy(goku)
+sasuke.attack_enemy(goku)
+naruto.attack_enemy(goku)
+sasuke.attack_enemy(goku)
+
+goku.attack_enemy(sasuke)
+goku.attack_enemy(naruto)
+				
+			
+
