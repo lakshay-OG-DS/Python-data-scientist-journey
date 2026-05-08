@@ -1,0 +1,138 @@
+
+class student:
+	school = "data science academy"
+	
+	def __init__(self,name,age,gpa):
+		self.name = name
+		self.age = age
+		self.gpa = gpa
+		self.course = [ ]
+		
+	def enroll(self,course):
+		self.course.append(course)
+		print(f"{self.name} enrolled to {course}")
+		
+	def get_status(self):
+		if self.gpa >= 3.0:
+			print("honor")
+		elif self.gpa >= 2.0:
+			print("standard")
+		else:
+			print("need improvement")
+		
+	def __str__(self):
+		return f"student: {self.name}, with gpa {self.gpa}"
+		
+alicce = student("alice",66,-667)
+
+
+
+print(alicce)
+
+alicce.enroll("machine learning")
+
+
+
+print(student.school)
+alicce.get_status(       )
+
+print("-----------------------------------")
+
+
+
+class BankAccount:
+	
+	def __init__(self, balance,intrest_rate):
+		self.balance = balance
+		self.intrest_rate = intrest_rate
+	
+	def deposit(self, amount):
+		self.balance += amount
+		print("money deposited: ",amount)
+		print("money deposited total currency", self.balance)
+	
+	def withdraw(self, amount):
+		if amount > self.balance:
+			print("cannot withdraw this amount: ",amount)
+			print("not enough money")
+		else:
+			self.balance -= amount
+			print("money withdrawed: ",amount)
+			print("money withdrawed money left:", self.balance)
+		
+	def get_balance(self,balance):
+		print("your current balance is : ",self.balance)
+		
+	def apply_intrest(self):
+		intrest = self.balance * self.intrest_rate/ 100
+		self.balance += intrest
+		print("money in intrest: ",intrest)
+		print("money after intrest",self.balance)
+	
+acc = BankAccount(100,77775)
+
+acc.deposit(33337777710)
+acc.apply_intrest( )
+acc.withdraw(10)
+
+
+class BankSystem:
+	def __init__(self):
+		self.account = []
+	
+	def add_account(self, name, balance):
+		name = name.lower().strip()
+		self.account.append({
+			"name": name,
+			"balance": balance
+		})
+	
+	def filter_account(self, amount):
+		result = []
+		for acc in self.account:
+			if acc["balance"] > amount:
+				result.append(acc)
+		return result
+	
+	def info(self):
+		for acc in self.account:
+			print("name:", acc["name"], "balance:", acc["balance"])
+
+
+bank = BankSystem()
+
+bank.add_account(" Alice ", 100)
+bank.add_account("BOB", 5070)
+bank.add_account("alice", 300)
+
+bank.info()
+
+print(bank.filter_account(2080))
+
+
+class grades:
+	
+	def __init__(self,name,marks):
+		self.name = name
+		self.marks = marks
+		
+	def classify(self):
+		if self.marks < 0 or self.marks > 100:
+			print(self.name,"grade :invalid")
+		elif self.marks >= 90:
+			print(self.name,"grade :excellent")
+		elif self.marks >= 70:
+			print(self.name,"grade :great")
+		elif self.marks >= 40:
+			print(self.name,"grade :average")
+		else:
+			print(self.name,"grade : bad")
+			
+student1 = grades("cooked", 0.8)
+student2 = grades("Bob", 55)
+student3 = grades("John", 92)
+
+student1.classify()
+student2.classify()
+student3.classify()
+		
