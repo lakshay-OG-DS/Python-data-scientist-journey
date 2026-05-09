@@ -1,0 +1,26 @@
+# safe_divide.py
+# Try-Except-Finally Practice
+
+def safe_divide(a, b):
+    """Safely divide two numbers with error handling"""
+    try:
+        result = a / b
+        print(f"Result: {result}")
+        return result
+        
+    except ZeroDivisionError:
+        print("Error: Cannot divide by zero")
+        return None
+        
+    except TypeError:
+        print("Error: Please provide numbers only")
+        return None
+        
+    finally:
+        print("Operation complete")
+
+# Test cases
+if __name__ == "__main__":
+    safe_divide(10, 2)      # Works
+    safe_divide(10, 0)      # ZeroDivisionError  
+    safe_divide("10", 2)    # TypeError
