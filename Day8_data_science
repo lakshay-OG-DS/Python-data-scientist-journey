@@ -1,5 +1,5 @@
 # safe_divide.py
-# Try-Except-Finally Practice
+# Try-Except-Finally Practice.
 
 def safe_divide(a, b):
     """Safely divide two numbers with error handling"""
