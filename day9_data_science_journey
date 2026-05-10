@@ -1,0 +1,84 @@
+import csv
+
+with open("student.csv","w") as f:
+	f.write("name,score,age\n")
+	f.write("me,99,17\n")
+	f.write("myfriend,98,17\n")
+
+print("student cvs file ye rhi ")
+
+try:
+	with open("student.csv","r") as f:
+		reader = csv.DictReader(f)
+		data = list(reader)
+		print(f"file ka data ye rha {data}")
+except FileNotFoundError:
+	print("file not found bro")
+	
+print("\n"+ "=" * 60)
+# with def function
+
+def student(file):
+	try:
+		with open(file,"r") as f:
+			reader = csv.DictReader(f)
+			data = list(reader)
+			return data
+	except FileNotFoundError:
+		print(f"bro file '{file}'nhi mili spelling check kr ya fir dekh h bhi ya nhi ?")
+
+student = student("student.csv")
+print(f"ye rha data laadle: {student}")
+
+print("\n"+"="*60)
+# csv already installed and imported
+def validate_student(row,line_num):
+			error = [ ]
+			
+			name = row.get("name",' ').strip()
+			if not name:
+				error.append(f"line {line_num} is empty")
+				
+			try:
+				age = int(row.get("age",0))
+				if age > 150 or age < 0:
+					error.append("invalid  age")
+			except ValueError:
+				error.append("line {line num} is wrong ")
+			
+			score_val = row.get("score",' ').strip()
+			if not score_val:
+				error.append("there is no score")
+			else:
+				try:
+					score = int(score_val)
+					if score > 100 or score < 0:
+						error.append(f"line {line_num} invalid score")
+				except ValueError:
+					error.append(f"line {line_num} there is wrong value")
+					
+			return error
+
+import csv
+
+def process_csv(input_file):
+    valid_row = []
+    all_error = []
+    
+    try:
+        with open(input_file, "r") as f:
+            reader = csv.DictReader(f)
+            for line, row in enumerate(reader, start=2):
+                error = validate_student(row, line)
+                if error:
+                    all_error.extend(error)
+                else:
+                    valid_row.append(row)
+    except FileNotFoundError:
+        print("error file not found")
+    
+    return valid_row, all_error
+
+data ,error = process_csv("student.csv")
+print("valid rows", data)
+print("all errors",error)
