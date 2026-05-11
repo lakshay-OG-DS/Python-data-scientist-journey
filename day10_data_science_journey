@@ -1,0 +1,43 @@
+def data_stream():
+    students = [
+    {"name": "Aman", "marks": 45},
+    {"name": "Ravi", "marks": 78},
+    {"name": "Neha", "marks": -10},  # invalid
+    {"name": "Sara", "marks": 90},
+    {"name": "John", "marks": 55}
+]
+    for s in students:
+    	yield s
+
+def marks(stream):
+	for s in stream:
+		if 0 <= s["marks"] <= 100:
+			yield s
+
+def passed(stream):
+	for s in stream:
+		if s["marks"] >= 50:
+			yield s
+
+def grades(stream):
+	for s in stream:
+		if s["marks"] >= 90:
+			grade = "A+"
+		elif s["marks"] >= 70:
+			grade = "A"
+		elif s["marks"] >= 50:
+			grade = "B"
+		else:
+			grade = "failed"
+			
+		yield f"{s['name']}-{s['marks']}-{grade}"
+
+stream = data_stream()
+stream = marks(stream)
+stream = passed(stream)
+stream = grades(stream)
+
+for result in stream:
+	print(result)
+
+
