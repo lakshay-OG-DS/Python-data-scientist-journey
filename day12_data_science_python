@@ -1,0 +1,20 @@
+# temprature calculator
+
+unit = (input("enter the temprature in c/k/f :  ")).lower()
+temp = float(input("enter the number : "))
+# now convert
+
+if unit == "c":
+	temp = temp*(9/5)+32
+	kel = round(temp + 273.15,1)
+	print(f"the value of farhanite is {temp} and kelvin is {kel}")
+elif unit == "f":
+	temp = 5/9*(temp-32)
+	kel = round(temp + 273.15,1)
+	print(f"the value of C is {temp} and kelvin is {kel}")
+elif unit == "k":
+	temp = temp - 273.15
+	far = round(temp*9/5+32,1)
+	print(f"the value of C is {temp} and far is {far}")
+else:
+	print(f"unit {unit} is not measurable ")
