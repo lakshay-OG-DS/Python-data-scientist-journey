@@ -1,0 +1,18 @@
+email input("Enter your email: ") index # this is what I saw 
+
+email.index("@") username = email[:index] 7 domain email[index + 1:] 8 9 print(f"Your username is {username} and domain is (domain}")
+
+# this is what I made :
+ email slicer
+
+email = input("enter your email : ")
+
+if "@" not in email:
+	print("invalid.input") 
+elif "gmail.com" not in email:
+	print("invalid domain")
+else:
+	index = email.index("@")
+	username = email[ : index]
+	domain = email[index + 1 : ]
+	print(f" your user name is {username} and your domain is {domain}")
