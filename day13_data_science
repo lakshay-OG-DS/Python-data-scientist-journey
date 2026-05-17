@@ -1,0 +1,26 @@
+# bank with intrest only
+principle = 0
+time = 0
+rate = 0
+
+while principle <= 0:
+	principle = float(input("enter the principle amount : "))
+	if principle < 0:
+		print(" principle cannot be less then zero")
+	
+
+while time == 0:
+	time = int(input(" enter the years : "))
+	if time <  0:
+		print("time cannot be zero")
+
+while rate <= 0:
+	rate = int(input(" enter the intrest rate: "))
+	if rate < 0:
+		print("intrest rate cannot be zero")
+
+the_principle = (f"principle amount is : {principle} ")
+
+total = round(principle * pow(1+rate/100,time))
+
+print(total)
