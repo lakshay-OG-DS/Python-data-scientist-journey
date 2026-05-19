@@ -1,0 +1,111 @@
+# School Sports Selector
+
+# ----------------------------
+# DATA MODELS
+# ----------------------------
+
+class Student:
+    def __init__(self, name, age, weight, height, grade):
+        self.name = name
+        self.age = age
+        self.weight = weight
+        self.height = height
+        self.grade = grade
+
+
+class Sport:
+    def __init__(self, name, min_height, max_weight, min_weight, max_age, min_age):
+        self.name = name
+        self.min_height = min_height
+        self.max_weight = max_weight
+        self.min_weight = min_weight
+        self.max_age = max_age
+        self.min_age = min_age
+
+
+# ----------------------------
+# SPORTS DATABASE
+# ----------------------------
+
+sports = [
+    Sport("football", 151, 67, 30, 25, 15),
+    Sport("badminton", 160, 60, 30, 19, 12),
+    Sport("basketball", 170, 80, 47, 25, 15),
+    Sport("kabbadi", 160, 89, 45, 26, 14)
+]
+
+
+# ----------------------------
+# VALIDATION
+# ----------------------------
+
+def validate_student(student):
+    if student.age <= 0 or student.height <= 0 or student.weight <= 0:
+        return False
+    return True
+
+
+# ----------------------------
+# EVALUATION LOGIC
+# ----------------------------
+
+def evaluate_sport(student):
+    eligible = []
+
+    for sport in sports:
+        if (
+            sport.min_age <= student.age <= sport.max_age and
+            sport.min_weight <= student.weight <= sport.max_weight and
+            student.height >= sport.min_height
+        ):
+            eligible.append(sport.name)
+
+    return eligible
+
+
+def best_sport(eligible_list):
+    if not eligible_list:
+        return "No suitable sport found"
+
+    priority = ["football", "badminton", "basketball", "kabbadi"]
+
+    for p in priority:
+        if p in eligible_list:
+            return p
+
+    return eligible_list[0]
+
+
+# ----------------------------
+# MAIN PROGRAM
+# ----------------------------
+
+def main():
+    print("-------- School Sports Selector --------")
+
+    name = input("Enter name: ")
+    age = int(input("Enter age: "))
+    height = float(input("Enter height (cm): "))
+    weight = float(input("Enter weight (kg): "))
+    grade = input("Enter class: ")
+
+    student_obj = Student(name, age, weight, height, grade)
+
+    if not validate_student(student_obj):
+        print("Invalid student data!")
+        return
+
+    eligible = evaluate_sport(student_obj)
+    best = best_sport(eligible)
+
+    print("\n--- RESULT ---")
+    print("Student:", student_obj.name)
+    print("Eligible Sports:", eligible)
+    print("Recommended Sport:", best)
+
+
+# ----------------------------
+# RUN PROGRAM
+# ----------------------------
+
+main()
