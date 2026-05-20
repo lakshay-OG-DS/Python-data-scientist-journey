@@ -1,0 +1,143 @@
+# SHOP BILL
+
+shop_items = {
+    "maggie": 40,
+    "parleG": 10,
+    "colgate": 60,
+    "dairy_milk": 80
+}
+
+cart = []
+
+
+# SHOW ITEMS
+def show_items():
+
+    print("\n------- SHOP ITEMS -------\n")
+
+    for item, price in shop_items.items():
+        print(f"{item} : ₹{price}")
+
+    print("=" * 30)
+
+
+# ADD TO CART
+def add_to_cart():
+
+    item = input("ENTER ITEM NAME: ").strip()
+
+    # Check availability
+    if item not in shop_items:
+        print("Item not available")
+        return
+
+    # Quantity input
+    try:
+        qty = int(input("ENTER QUANTITY: "))
+
+        if qty <= 0:
+            print("Invalid quantity")
+            return
+
+    except ValueError:
+        print("Please enter a valid number")
+        return
+
+    # Check duplicate item
+    for product in cart:
+
+        if product["name"] == item:
+
+            product["qty"] += qty
+
+            print(f"{item.title()} updated : {product['qty']} total")
+            return
+
+    # Add new item
+    cart.append({
+        "name": item,
+        "qty": qty,
+        "price": shop_items[item]
+    })
+
+    print(f"{item.title()} added to cart")
+
+
+# SHOW CART
+def show_cart():
+
+    if not cart:
+        print("Cart is empty")
+        return
+
+    total = 0
+
+    print("\n------- YOUR CART -------\n")
+
+    for product in cart:
+
+        item_total = product["price"] * product["qty"]
+
+        total += item_total
+
+        print(product["name"], "x", product["qty"], "=", item_total)
+
+    print("-" * 30)
+    print("TOTAL =", total)
+
+
+# GENERATE BILL
+def generate_bill():
+
+    if not cart:
+        print("Cart is empty")
+        return
+
+    total = 0
+
+    print("\n------- FINAL BILL -------\n")
+
+    for product in cart:
+
+        item_total = product["price"] * product["qty"]
+
+        total += item_total
+
+        print(product["name"], "x", product["qty"], "=", item_total)
+
+    print("-" * 30)
+    print("GRAND TOTAL =", total)
+
+    # Clear cart after bill
+    cart.clear()
+
+
+# MAIN PROGRAM
+while True:
+
+    print("\n1. Show Items")
+    print("2. Add Item")
+    print("3. Show Cart")
+    print("4. Generate Bill")
+    print("5. Exit")
+
+    choice = input("Choose an option: ")
+
+    if choice == "1":
+        show_items()
+
+    elif choice == "2":
+        add_to_cart()
+
+    elif choice == "3":
+        show_cart()
+
+    elif choice == "4":
+        generate_bill()
+
+    elif choice == "5":
+        print("Shop Closed")
+        break
+
+    else:
+        print("Invalid option")
