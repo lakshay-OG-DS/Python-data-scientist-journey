@@ -1,0 +1,284 @@
+anime_db = [
+
+    {
+        "name": "Attack on Titan",
+        "tags": ["dark", "action", "survival", "mystery", "apocalypse"]
+    },
+
+    {
+        "name": "Death Note",
+        "tags": ["psychological", "thriller", "mindgame", "dark", "mystery"]
+    },
+
+    {
+        "name": "Re:Zero",
+        "tags": ["isekai", "dark", "psychological", "time-loop", "thriller"]
+    },
+
+    {
+        "name": "Steins;Gate",
+        "tags": ["sci-fi", "time-travel", "psychological", "thriller", "smart"]
+    },
+
+    {
+        "name": "Jujutsu Kaisen",
+        "tags": ["action", "dark", "supernatural", "fast-paced"]
+    },
+
+    {
+        "name": "Demon Slayer",
+        "tags": ["action", "emotional", "demons", "adventure"]
+    },
+
+    {
+        "name": "Vinland Saga",
+        "tags": ["revenge", "historical", "emotional", "war", "dark"]
+    },
+
+    {
+        "name": "Tokyo Ghoul",
+        "tags": ["dark", "gore", "psychological", "action"]
+    },
+
+    {
+        "name": "Another",
+        "tags": ["horror", "mystery", "school", "dark"]
+    },
+
+    {
+        "name": "Monster",
+        "tags": ["psychological", "thriller", "crime", "slowburn", "dark"]
+    },
+
+    {
+        "name": "Code Geass",
+        "tags": ["strategy", "war", "mecha", "mindgame", "smart"]
+    },
+
+    {
+        "name": "Your Name",
+        "tags": ["romance", "emotional", "drama", "supernatural"]
+    },
+
+    {
+        "name": "A Silent Voice",
+        "tags": ["emotional", "drama", "school", "sad"]
+    },
+
+    {
+        "name": "Cyberpunk Edgerunners",
+        "tags": ["cyberpunk", "action", "tragic", "fast-paced", "dark"]
+    },
+
+    {
+        "name": "Chainsaw Man",
+        "tags": ["chaotic", "dark", "action", "gore", "comedy"]
+    },
+
+    {
+        "name": "Oregairu",
+        "tags": ["school", "romance", "smart", "drama", "slowburn"]
+    },
+
+    {
+        "name": "Classroom of the Elite",
+        "tags": ["school", "mindgame", "smart", "psychological"]
+    },
+
+    {
+        "name": "Mushoku Tensei",
+        "tags": ["isekai", "fantasy", "adventure", "emotional"]
+    },
+
+    {
+        "name": "Konosuba",
+        "tags": ["isekai", "comedy", "chaotic", "fantasy"]
+    },
+
+    {
+        "name": "No Game No Life",
+        "tags": ["isekai", "mindgame", "smart", "fantasy"]
+    },
+
+    {
+        "name": "Parasyte",
+        "tags": ["horror", "psychological", "action", "dark"]
+    },
+
+    {
+        "name": "Erased",
+        "tags": ["mystery", "time-travel", "thriller", "emotional"]
+    },
+
+    {
+        "name": "Blue Lock",
+        "tags": ["sports", "competitive", "hype", "fast-paced"]
+    },
+
+    {
+        "name": "Haikyuu",
+        "tags": ["sports", "motivational", "teamwork", "hype"]
+    },
+
+    {
+        "name": "One Punch Man",
+        "tags": ["comedy", "action", "overpowered", "funny"]
+    },
+
+    {
+        "name": "Mob Psycho 100",
+        "tags": ["psychological", "comedy", "supernatural", "emotional"]
+    },
+
+    {
+        "name": "Berserk",
+        "tags": ["dark", "gore", "revenge", "medieval", "tragic"]
+    },
+
+    {
+        "name": "Hell's Paradise",
+        "tags": ["survival", "dark", "action", "mystery"]
+    },
+
+    {
+        "name": "Dr. Stone",
+        "tags": ["science", "smart", "survival", "adventure"]
+    },
+
+    {
+        "name": "Spy x Family",
+        "tags": ["comedy", "family", "action", "wholesome"]
+    },
+
+    {
+        "name": "Frieren",
+        "tags": ["fantasy", "emotional", "slowburn", "adventure"]
+    },
+
+    {
+        "name": "The Promised Neverland",
+        "tags": ["thriller", "mindgame", "survival", "dark"]
+    },
+
+    {
+        "name": "Akame ga Kill",
+        "tags": ["dark", "action", "tragic", "war"]
+    },
+
+    {
+        "name": "Black Clover",
+        "tags": ["magic", "action", "motivational", "adventure"]
+    },
+
+    {
+        "name": "Naruto",
+        "tags": ["action", "ninja", "motivational", "adventure"]
+    },
+
+    {
+        "name": "Bleach",
+        "tags": ["action", "supernatural", "swords", "dark"]
+    },
+
+    {
+        "name": "One Piece",
+        "tags": ["adventure", "funny", "emotional", "action"]
+    },
+
+    {
+        "name": "Hunter x Hunter",
+        "tags": ["adventure", "smart", "dark", "action"]
+    },
+
+    {
+        "name": "Made in Abyss",
+        "tags": ["dark", "adventure", "mystery", "tragic"]
+    },
+
+    {
+        "name": "Horimiya",
+        "tags": ["romance", "school", "wholesome", "comedy"]
+    },
+
+    {
+        "name": "Toradora",
+        "tags": ["romance", "comedy", "school", "emotional"]
+    },
+
+    {
+        "name": "Kaguya-sama",
+        "tags": ["romance", "mindgame", "comedy", "school"]
+    },
+
+    {
+        "name": "86",
+        "tags": ["war", "mecha", "tragic", "emotional"]
+    },
+
+    {
+        "name": "Fate/Zero",
+        "tags": ["dark", "action", "magic", "battle-royale"]
+    },
+
+    {
+        "name": "JoJo's Bizarre Adventure",
+        "tags": ["chaotic", "action", "stylish", "supernatural"]
+    },
+
+    {
+        "name": "Summertime Rendering",
+        "tags": ["mystery", "thriller", "time-loop", "dark"]
+    },
+
+    {
+        "name": "Hellsing Ultimate",
+        "tags": ["vampire", "gore", "action", "dark"]
+    },
+
+    {
+        "name": "Neon Genesis Evangelion",
+        "tags": ["psychological", "mecha", "depression", "deep"]
+    },
+
+    {
+        "name": "Charlotte",
+        "tags": ["supernatural", "school", "emotional", "drama"]
+    },
+
+    {
+        "name": "Clannad",
+        "tags": ["romance", "sad", "emotional", "drama"]
+    }
+
+]
+
+tag1 = (input("enter your first tag : ")).strip()
+tag2 = (input("enter your second tag : ")).strip()
+tag3= (input("enter your third tag : ")).strip()
+tag4 = (input("enter your forth tag : ")).strip()
+tag5 = (input("enter your fifth tag: ")).strip()
+
+print("----------------ANIME RECOMMEDED FOR YOU------------------")
+
+for anime in anime_db:
+	score = 0
+	
+	
+	if tag1 in anime["tags"]:
+		score += 1
+	
+	if tag2 in anime["tags"]:
+		score += 1
+	
+	if tag3 in anime["tags"]:
+		score += 1
+
+	if tag4 in anime["tags"]:
+		score += 1
+		
+	if tag5 in anime["tags"]:
+		score += 1
+	
+	if score >=2:
+		print(anime["name"])
+		
