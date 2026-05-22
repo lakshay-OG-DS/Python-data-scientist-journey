@@ -1,0 +1,71 @@
+import turtle
+
+screen = turtle.Screen()
+screen.bgcolor("grey")
+screen.title("Analytical Graph ")
+
+pen = turtle.Turtle()
+pen.speed(0)
+pen.hideturtle()
+
+# data
+names = ["A", "R", "N", "R", "S", "K", "A", "J", "M", "D"]
+temps = [30, 32, 28, 35, 31, 29, 33, 36, 27, 34]
+
+# base line
+pen.color("green")
+pen.penup()
+pen.goto(-250, -150)
+pen.pendown()
+pen.forward(500)
+
+max_temp = max(temps)
+max_index = temps.index(max_temp)
+
+x = -230
+
+for i in range(len(temps)):
+
+    height = temps[i] * 5
+
+    # BAR
+    bar = turtle.Turtle()
+    bar.speed(0)
+    bar.penup()
+    bar.goto(x, -150)
+    bar.pendown()
+
+    bar.color("orange" if i == max_index else "black")
+
+    bar.begin_fill()
+    bar.setheading(90)
+    bar.forward(height)
+    bar.right(90)
+    bar.forward(25)
+    bar.right(90)
+    bar.forward(height)
+    bar.right(90)
+    bar.forward(25)
+    bar.end_fill()
+
+    # TRUE TILTED TEXT (diagonal upward)
+    label = turtle.Turtle()
+    label.hideturtle()
+    label.penup()
+    label.color("white")
+
+    # start near bottom of bar
+    start_x = x
+    start_y = -150
+
+    # write letters diagonally upward
+    for ch in names[i]:
+        label.goto(start_x, start_y)
+        label.write(ch, font=("Arial", 8, "normal"))
+
+        start_x += 4     # move right
+        start_y += 6     # move up (THIS creates tilt effect)
+
+    x += 40
+
+turtle.done()
