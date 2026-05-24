@@ -1,0 +1,45 @@
+import random
+
+pokemon = {
+"pikachu": 72,
+"charizard": 91,
+"lucario": 86,
+"greninja": 88,
+"garchomp": 94,
+"snorlax": 79,
+"gengar": 84,
+"dragonite": 93,
+"zoroark": 77,
+"blaziken": 89,
+"tyranitar": 95,
+"sceptile": 81,
+"metagross": 96,
+"infernape": 85,
+"umbreon": 74
+}
+def pokemon_power():
+	your_choice = (input("your pokemon name : ")).strip().lower()
+	your_power = pokemon[your_choice]  
+	print("your pokemon power is",your_power)
+	  
+	if your_choice not in pokemon:
+	  print("invalid")
+	  return
+	  
+	else:  
+		comp_choice = random.choice(list(pokemon))
+		print("comp chose",comp_choice) 
+		comp_power = pokemon[comp_choice] 
+		print("comp pokemon power is ",comp_power)
+		  
+		if pokemon[your_choice] > pokemon[comp_choice]:  
+			print("you won")
+			  
+			  
+		elif pokemon[comp_choice] > pokemon[your_choice]:  
+			print("comp won")  
+			  
+		else:  
+			print("draw")
+
+pokemon_power()
