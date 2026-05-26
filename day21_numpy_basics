@@ -88,4 +88,4 @@ print("Reshape 2x3:\n", reshaped)
 col_vec_auto = flat.reshape(-1,1)
 print("Column vector shape:", col_vec_auto.shape)
 
-print("\n✅ NumPy high priority concepts DONE. Ready for Pandas.")
+print("\n NumPy high priority concepts DONE. Ready for Pandas.")
