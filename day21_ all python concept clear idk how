@@ -1,0 +1,63 @@
+# conditional indexing
+
+import numpy as np
+
+marks = np.array([80,70,58,38,97,98,90])
+high_marks = np.where(marks > 80)[0]
+high = [int(marks[i]) for i in high_marks]
+print(high)
+
+high_mars = (marks > 80)
+print(high_mars)
+print("="*50)
+score = np.array([
+[10,20,7],
+[40,6372,60],
+[70,80,90]
+])
+evn = (score % 2 == 0)
+print(evn)
+print("="*50)
+
+print("="*50)
+avf = score[score % 2 == 0] # change the bracket and add score ahead for nums in 2D
+print(avf)
+print("="*50)
+# this time its true false too lets convert it into nums
+'''
+print("="*60)
+eve = np.where(score - 1)[0]
+so = [int(score[i]) for i in eve]
+print(so)
+so we found out that it only work in 1d not 2d
+'''
+# no we can do it 
+
+# BROAD CASTING
+print("="*50)
+arr = np.array([
+[10,20,30],
+[40,50,60]
+])
+print(type(arr + 10)) # it shows its array
+print(arr //10) # ez
+
+print("="*50)
+print("NOW ROWs")
+
+rows = np.array([
+[10,20,30],
+[50,60,70]
+])
+print(rows + arr)
+
+print("="*50)
+
+col = np.array([
+[10,20,30],
+[50,60,70]
+])
+print(col + rows) # IT WORKS IN PATTERN DOWN DOWN OR LEFT LEFT
+
+print("="*50)
+
