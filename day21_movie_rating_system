@@ -1,0 +1,46 @@
+import numpy as np
+
+# Rows: 5 movies (Movie 0 to Movie 4)
+# Columns: 10 users (User 0 to User 9)
+ratings = np.array([
+    [4, 5, 3, 2, 4, 5, 4, 3, 2, 5],  # Movie 0
+    [2, 3, 4, 5, 3, 2, 4, 5, 5, 4],  # Movie 1
+    [5, 4, 5, 4, 5, 5, 4, 5, 4, 5],  # Movie 2
+    [1, 2, 1, 2, 1, 2, 1, 2, 1, 2],  # Movie 3
+    [3, 4, 3, 4, 3, 4, 3, 4, 3, 4]   # Movie 4
+])
+
+average_ratings = np.mean(ratings,axis =1)
+print(f"average ratings of 5 movies are : {average_ratings}")
+print("="*60)
+
+highest = np.max(ratings,axis = 1)
+print(f"highest ratings of movies are: {highest}")
+print("="*60)
+
+movie_b = np.argmax(average_ratings)
+b_rat =np.max(average_ratings)
+print(f"{movie_b} is the best movie with ratings : {b_rat}")
+print("="*60)
+
+movie_w = np.argmin(average_ratings)
+w_rat =np.min(average_ratings)
+print(f"{movie_w} is the worst movie with ratings : {w_rat}")
+print("="*60)
+
+user_avg_rating = np.mean(ratings,axis = 0)
+print(f"average user ratings are: {user_avg_rating}")
+print("="*60)
+
+best_user = np.argmax(user_avg_rating)
+avg_best = np.max(average_ratings)
+print(f"the best user is index:{best_user} with rating:{avg_best}")
+print("="*60)
+
+worst_user = np.argmin(user_avg_rating)
+avg_worst = np.min(average_ratings)
+print(f"the worst user is index:{worst_user} with rating:{avg_worst}")
+print("="*60)
+
+normalize_rat = (average_ratings - w_rat//b_rat - w_rat)
+print(normalize_rat)
