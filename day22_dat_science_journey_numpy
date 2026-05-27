@@ -1,0 +1,50 @@
+import numpy as np
+
+# Data in dictionary format (student-wise)
+data = {
+    "Student1": [85, 90, 78, 92, 88],
+    "Student2": [15, 18, 55, 60, 48],
+    "Student3": [92, 94, 91, 89, 95],
+    "Student4": [35, 40, 32, 38, 45],
+    "Student5": [78, 82, 80, 85, 88]
+}
+
+# Convert to NumPy array (rows = students, cols = subjects)
+marks = np.array(list(data.values()))
+
+print(marks)
+print("Shape:", marks.shape)
+
+average_marks = np.mean(marks)
+print(f"average marks of per students are {average_marks}")
+
+total_marks = np.sum(marks,axis=1)
+print(f"total marks per student are {total_marks}")
+
+percentage = (total_marks/500)*100
+print(f"percantage of marks per student : {percentage}")
+
+topper = np.argmax(total_marks)
+print(f"the student with the highest marks is no : {topper}")
+
+worst = np.argmin(total_marks)
+print(f"the student with the lowest marks is no : {worst}")
+
+subject_topper = np.argmax(marks,axis=0)
+print(f"number {subject_topper} is the topper in every subject ")
+
+failed = np.where(percentage < 40)[0]+1
+if len(failed) > 0:
+	print(f"the failed students are : ",failed )
+else:
+	print("none")
+
+grade = []
+for p in percentage:
+	if p >= 90: grade.append("A+")
+	elif p >= 80: grade.append("A")
+	elif p >= 70: grade.append("B")
+	elif p >= 60: grade.append("C")
+	elif p >= 40: grade.append("D")
+	else: grade.append("F")
+print(grade)
