@@ -1,0 +1,130 @@
+import pandas as pd
+import numpy as np
+
+print(pd.__version__)
+
+data = {
+"student" : ['arav','mihul','baalak','lakshay','dark','parth'],
+"maths":[57,67,79,88,62,99],
+"chemistry":[29,19,87,72,62,99]
+}
+df = pd.DataFrame(data)
+print(df)
+
+print("="*60)
+
+print(df['maths'].mean())
+print(df['maths'])
+
+print("="*60)
+
+df['total'] = df['maths'] + df['chemistry']
+print(df)
+
+
+print("="*60)
+
+exception = (df[df['maths'] > 70])
+print(exception)
+
+print("="*60)
+
+srt_a = (df.sort_values('maths',ascending = True))
+print(f"marks from ascending in maths : \n {srt_a}")
+# now thats the use of \n
+
+print("="*60)
+
+srt_d = (df.sort_values('maths',ascending = False))
+print(f"marks from descending in maths : \n {srt_d}")
+
+print("="*60)
+
+srt_c = (df.sort_values('chemistry',ascending = True))
+print(f"marks from ascending in chemistry : \n {srt_c}")
+
+print("="*60)
+
+srt_f = (df.sort_values('chemistry',ascending = False))
+print(f"marks from descending in chemisrty : \n {srt_f}")
+
+print("="*60)
+
+s = pd.Series([10,20,30] , index = (['a','b','c']))
+print(s)
+
+print("="*60)
+
+pds = pd.read_csv('student.csv')
+print(pds)
+
+print("="*60)
+
+print(pds.info())
+
+print("="*60)
+
+print(pds.head(1))
+
+print("="*60)
+
+print(pds.tail(1))
+
+print("="*60)
+
+print(pds.describe())
+
+
+# mini project
+
+
+data = {
+    'student': ['Aarav', 'Vihaan', 'Ananya', 'Diya', 'Kabir', 'Laksh', 'Mira', 'Neha'],
+    'ssc': [85, 99, 78, 92, 88, 76, 95, 89],
+    'science': [90, 85, 66, 94, 87, 82, 98, 91],
+    'english': [78, 88, 85, 91, 84, 79, 92, 87]
+}
+vs = pd.DataFrame(data)
+print(vs)
+
+print("="*60)
+
+vs['total_mark'] = vs['ssc'] + vs['science'] + vs['english']
+print(vs)
+
+print("="*60)
+
+vs['percentage'] = (vs['total_mark'] / 300) * 100
+print(vs['percentage'])
+
+print("="*60)
+
+conditions = [
+    vs['percentage'] >= 90,
+    vs['percentage'] >= 75,
+    vs['percentage'] >= 50,
+    vs['percentage'] < 50
+]
+grades = ['A', 'B', 'C', 'D']
+vs['grade'] = np.select(conditions, grades,default='F')
+
+print(vs)
+
+print("="*60)
+
+print(vs.info())
+
+print("="*60)
+
+toppers = vs[vs['total_mark'] == vs['total_mark'].max()]
+print(toppers)
+
+print("="*60)
+
+honour = vs[vs['total_mark'] > 80]
+print(f'the honoured ones are : \n {honour}')
+
+print("="*60)
+
+vs.to_csv('student_report.csv',index = False)
+print("report saved")
