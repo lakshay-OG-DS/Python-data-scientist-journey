@@ -1,0 +1,45 @@
+import pandas as pd
+
+df = (pd.read_csv('std.csv'))
+
+print(df)
+
+print('='*60)
+
+df['TOTAL'] = df['Maths'] + df['Science']+ df['English']
+print(df)
+
+print('='*60)
+
+df['PERCENTAGE'] = (df['TOTAL']/300)*100
+print(df)
+
+print('='*60)
+
+def get_grades(perc):
+	if perc > 90: return 'A+'
+	elif perc > 80: return 'A'
+	elif perc > 60: return 'B'
+	elif perc > 40: return 'C'
+	else: return 'D, failed'
+
+
+df['grades'] = df['PERCENTAGE'].apply(get_grades)
+print(df)
+
+print('='*60)
+
+topper = df[df['TOTAL'] == df['TOTAL'].max()]
+print("\n topper is : ")
+print(topper)
+
+print("="*60)
+
+avg_perc = df['PERCENTAGE'].mean()
+print(f"AVERAGE PERCENTAGE OF THE TEST IS : {avg_perc}")
+
+honours = df[df['PERCENTAGE'] > 80]
+print(f"HONOURS ARE : \n{honours}")
+
+df.to_csv('CLASS_TEST.csv', index = False)
+print("\n FILE IS SAVED AS CLASS_TEST.csv")
