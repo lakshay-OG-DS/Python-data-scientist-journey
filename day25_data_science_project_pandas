@@ -1,0 +1,60 @@
+import pandas as pd
+
+data = {
+    'Class': ['A', 'B', 'A', 'B'],
+    'Marks': [85, 100, 78, 95],
+    'Grade': ['A+', 'A', 'B+', 'A']
+}
+df = pd.DataFrame(data)
+print(df)
+
+print("="*60)
+       
+avg = df.groupby('Class')['Marks'].min().sort_values(ascending = False)
+print(avg)
+
+print("="*60)
+       
+df['cs_avg'] = df.groupby('Class')['Marks'].transform('mean')
+print(df)
+
+print("="*60)
+       
+agv = df.groupby('Class').filter(lambda x : x['Marks'].max() > 80)
+print(agv)
+
+print("="*60)
+sel = df.loc[df.groupby('Class')['Marks'].idxmax()]
+print(sel)
+
+
+print("="*60)
+
+vw = pd.DataFrame({
+    'class':['A','A','B','B','C','C'],
+    'name':['Ronin','Ali','Sara','John','Tom','Max'],
+    'marks':[85,78,95,88,70,92]
+})
+
+vw['AVG_MARKS'] = vw.groupby('class')['marks'].transform('mean')
+print(vw)
+
+print("="*60)
+       
+vw['Above_avg'] = vw['marks'] > vw['AVG_MARKS']
+print(vw)
+
+print("="*60)
+       
+top = vw.loc[vw.groupby('class')['marks'].idxmax()]
+print(top)
+
+print("="*60)
+       
+low = vw.loc[vw.groupby('class')['marks'].idxmin()]
+print(low)
+
+print("="*60)
+       
+avh = vw.groupby('class').filter(lambda x: x['marks'].max() > 85)
+print(avh)
