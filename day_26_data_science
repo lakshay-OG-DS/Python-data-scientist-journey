@@ -1,0 +1,74 @@
+#apply()
+import pandas as pd
+import numpy as np
+
+df = pd.DataFrame({'A':[1,2,3],'B':[4,5,6]})
+
+result = df.apply(np.sqrt)
+print(result)
+
+def double(x):
+	return x**2
+sqr = df.apply(double)
+print(sqr)
+
+# in each row
+
+df = pd.DataFrame({'maths':[99,88,67],'phy':[79,99,100]})
+#avg
+def avg(x):
+	return (x['maths']+x['phy'])/2
+
+df['average'] = df.apply(avg,axis = 1)
+print(df)
+
+# lambda 
+
+df['avg'] = df.apply(lambda x: (x['maths']+x['phy'])/2, axis = 1)
+print(df)
+
+# grade
+
+def grade(marks):
+	if marks >= 90:
+		return 'A'
+	elif marks >=70:
+		return 'B'
+	else:
+		return 'C'
+
+df['Grade'] = df['average'].apply(grade)
+print(df)
+
+print('='*60)
+
+vw = pd.DataFrame({
+    'Name': ['Aarav', 'Vihaan', 'Ananya', 'Diya'],
+    'Maths': [85, 92, 78, 95],
+    'English': [88, 79, 91, 89]
+})
+def total(v):
+	return (v['Maths']+v['English'])
+
+vw['TOTAL'] = vw.apply(total,axis = 1)
+print(vw)
+
+def perc(v):
+	return ((v/200)*100)
+	
+vw['PERCENTAGE'] = vw['TOTAL'].apply(perc)
+print(vw)
+
+def remark(k):
+	if k > 90:
+		return 'A'
+	elif k > 70:
+		return 'B'
+	elif k > 60:
+		return 'C'
+	else:
+		return ' failed'
+
+vw['GRADE'] = vw['PERCENTAGE'].apply(remark)
+print(vw)
+		
