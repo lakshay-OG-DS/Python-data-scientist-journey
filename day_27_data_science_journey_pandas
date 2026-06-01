@@ -1,0 +1,69 @@
+import pandas as pd
+import numpy as np
+
+df = pd.DataFrame({
+    'Product': ['A', 'B', 'C', 'D', 'E'],
+    'Price': [100, 200, np.nan, 400, 500],
+    'Quantity': [5, np.nan, 10, np.nan, 20],
+    'Rating': [4.5, 4.0, 3.5, np.nan, 4.8]
+})
+
+print(df)
+
+print("="*60)
+
+df_med = df.fillna(0)
+print(df_med)
+
+print("="*60)
+
+
+df['Price'] = df['Price'].fillna(df['Price'].median())
+print(df)
+
+print("="*60)
+
+df['Quantity'] = df['Quantity'].fillna(0)
+print(df)
+
+
+print("="*60)
+
+df['Rating'] = df['Rating'].fillna(df['Rating'].mean())
+print(df)
+
+print("="*60)
+
+print("="*60)
+
+print("="*60)
+
+
+df_students = pd.DataFrame({
+    'StudentID': [1, 2, 3, 4],
+    'Name': ['Aarav', 'Vihaan', 'Ananya', 'Diya']
+})
+
+df_scores = pd.DataFrame({
+    'StudentID': [1, 2, 3, 5],
+    'Marks': [85, 92, 78, 95]
+})
+
+left = pd.merge(df_students,df_scores,on='StudentID',how='left')
+print(left)
+
+
+print("="*60)
+
+right = pd.merge(df_students,df_scores,on='StudentID',how='right')
+print(right)
+
+print("="*60)
+
+inner = pd.merge(df_students,df_scores,on='StudentID',how='inner')
+print(inner)
+
+print("="*60)
+
+outer = pd.merge(df_students,df_scores,on='StudentID',how='outer')
+print(outer
