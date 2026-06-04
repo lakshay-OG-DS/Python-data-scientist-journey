@@ -1,0 +1,22 @@
+import pandas as pd
+
+df = pd.DataFrame({
+    'Product': ['Lap', 'Mouse', 'Lap', 'Key', 'Mouse', 'Lap'],
+    'City': ['D', 'M', 'D', 'M', 'D', 'M'],
+    'Sales': [500, 20, 450, 30, 25, 600],
+    'Qty': [2,5,3,10,8,4]
+})
+
+pivot = pd.pivot_table(df,values = 'Sales',index = 'Product',columns = 'City',aggfunc = 'sum',fill_value = 0)
+print(pivot)
+
+print("="*60)
+qty = df.groupby('City')['Qty'].mean()
+print(qty)
+
+print('-'*60)
+
+total_sale = df["Sales"].sum()
+total_qty = df['Qty'].sum()
+
+print(f'total sales = {total_sale} , total qty = {total_qty} ')
