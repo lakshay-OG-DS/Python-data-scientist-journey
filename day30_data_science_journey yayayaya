@@ -1,0 +1,82 @@
+# concat
+import pandas as pd 
+
+df1 = pd.DataFrame({'A':[1,2],'B':[3,4]})
+df2 = pd.DataFrame({'A':[5,6],'D':[7,8]})
+
+mergv = pd.concat([df1,df2], ignore_index = True).fillna(0)
+print(mergv)
+
+print('='*60)
+
+mergh = pd.concat([df1,df2],axis = 1)
+print(mergh)
+
+# melt()
+
+df3 = pd.DataFrame({
+'product': ['laptop','pc'],
+'delhi':[500,1209],
+'mumbai':[643,3812]
+})
+
+mel = pd.melt(df3,id_vars = ['product'],value_vars = ['delhi','mumbai'],var_name = 'city',value_name = 'units')
+print(mel)
+
+print('='*60)
+
+df4 = pd.DataFrame({
+'Class': ['A', 'A', 'B', 'B'],
+'Subject': ['Maths', 'Science', 'Maths', 'Science'],
+'Marks': [85, 90, 78, 88]
+})
+
+v1 = df4.set_index(['Class','Subject'])
+print('original\n',v1)
+
+print('='*60)
+unst = v1.unstack()
+print('unstacked\n',unst) # really messy
+
+print('='*60)
+
+stacked = v1.stack()
+print('stacked\n',stacked)
+
+# task
+df5 = pd.DataFrame({
+    'Product': ['Laptop', 'Mouse', 'Keyboard', 'Monitor'],
+    'Delhi_Sales': [500, 20, 30, 400],
+    'Mumbai_Sales': [600, 25, 35, 450]
+})
+
+df6 = pd.DataFrame({
+'product': ['laptop','pc'],
+'delhi':[500,1209],
+'mumbai':[643,3812]
+})
+
+#melt first
+
+melt2 = pd.melt(df5,id_vars=['Product'],value_vars = ['Delhi_Sales','Mumbai_Sales'],var_name = 'city',value_name = 'sales')
+print(melt2)
+
+print('='*60)
+# concat now
+
+conc2 = pd.concat([df5,df6],ignore_index = True).fillna(0)
+print(conc2)
+
+# stack and unstack from melt
+
+melt3 = melt2.set_index(['Product','city'])
+#unstack
+unstacked = melt3.unstack()
+print(unstacked)
+
+print('='*60) # =*60 supremacy haha
+
+stacked = melt3.stack()
+print(stacked)
+
+
