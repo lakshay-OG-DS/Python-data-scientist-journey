@@ -1,0 +1,91 @@
+import pandas as pd 
+
+df = pd.DataFrame({
+'Name': ['Arav','Vihaan','Ananya'],
+'City': ['Delhi','Mumbai','New_york']
+})
+# strip 
+
+df['Name'] = df['Name'].str.strip().str.upper()
+print(df)
+
+print("="*60)
+# contain 
+
+df['City'] = df['City'].str.contains('New')
+print(df)
+
+print('='*60)
+
+# duplicates  and drop  boolean only 
+
+df2 = pd.DataFrame({
+    'ID': [1, 2, 2, 3, 3,3,2,5,7,8,9,5,3,2,8,9, 3,99],
+    'Value': [10,50, 20, 20, 30, 30, 30,57,21,20,30,40,30,50,30,40,20,373]
+})
+
+print(df2.duplicated())
+
+print('='*60)
+
+drop = df2.drop_duplicates()
+print(drop)
+
+print('='*60)
+
+drop_id = df2.drop_duplicates(subset = ['ID'])
+print(drop_id)
+
+print('='*60)
+# sample
+
+df5 = pd.DataFrame({'A': range(1, 101), 'B': range(101, 201)})
+
+sample1 = df5.sample(n=4)
+print(sample1)
+
+print('='*60)
+
+# % of rows
+
+sample2 = df5.sample(frac = 0.1)
+print(sample2)
+
+print('='*60)
+# random 
+
+sample3 = df5.sample(n=5,random_state = 50)
+print(sample3)
+
+print('='*60)
+# task
+dfu = pd.DataFrame({
+    'Namee': ['  alice ', 'BOB', '  charlie', 'ALICE', 'bob  '],
+    'City': ['new york', 'los angeles', 'New York', 'miami', 'los angeles']
+})
+
+# str opp
+print('='*60)
+dfu['Name']  = dfu['Namee'].str.title()
+print(dfu)
+
+print('='*60)
+dfu['New_city'] = dfu['City'].str.lower().str.title()
+print(dfu)
+
+print('='*60)
+
+# duplicates now
+
+dp1 = dfu.duplicated()
+print(dp1)
+print('='*60)
+
+dp2 = dfu.drop_duplicates(subset = ['New_city','Name'])
+print(dp2)
+
+print('='*60)
+
+#sample
+samp1 = df.sample(n=3,random_state=2)
+print(samp1)
