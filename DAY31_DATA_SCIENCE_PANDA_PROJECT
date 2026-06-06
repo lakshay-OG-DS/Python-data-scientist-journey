@@ -1,0 +1,90 @@
+import pandas as pd
+
+df = pd.read_csv("abc.csv")
+
+print(df)
+
+print('='*60)
+
+dsc = df.describe()
+print(dsc)
+
+print('='*60)
+
+inf = df.info()
+print(inf)
+
+print('='*60)
+
+def avg(row):
+return ((row['language']+row['science']+row['history']+row['maths'])/2)
+
+df['AVERAGE'] = df.apply(avg,axis = 1)
+print(df)
+
+print('='*60)
+
+def tot(row):
+return (row['language']+row['science']+row['history']+row['maths'])
+
+df['TOTAL'] = df.apply(tot,axis = 1)
+print(df)
+
+print('='*60)
+
+df['PERCENTAGE'] = (df['TOTAL']/400)*100
+print(df)
+
+print('='*60)
+
+def grade(marks):
+if marks > 90:
+return 'A+'
+elif marks > 80:
+return 'A'
+elif marks > 70:
+return 'B'
+elif marks > 60:
+return 'C'
+elif marks > 50:
+return 'D'
+elif marks > 40:
+return 'E'
+elif marks > 30:
+return 'FAILED'
+
+df['GRADES'] = df['PERCENTAGE'].apply(grade)
+print(df)
+
+print('='*60)
+
+stack
+
+stacked = df.stack()
+print(stacked)
+
+unstacked
+
+print('='*60)
+
+unstacked = df.unstack()
+print(unstacked)
+
+print('='*60)
+
+melt ?
+
+melt = pd.melt(df,id_vars = ['student'],value_vars = ['language','maths','science','history'],var_name = 'NEW_STUDENTS',value_name = 'new_value')
+print(melt)
+
+print('='*60)
+
+shape
+
+print(df.shape)
+
+print('='*60)
+
+size
+
+print(df.size)
