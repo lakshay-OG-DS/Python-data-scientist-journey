@@ -1,0 +1,32 @@
+import pandas as pd
+import numpy as np
+
+df = pd.DataFrame({
+    'Name': [' alice ', 'BOB', 'Charlie', 'alice', np.nan, 'David', 'Eve', 'BOB'],
+    'Age': [23, 25, np.nan, 23, 29, 150, 22, 25],
+    'City': ['new york', 'Los Angeles', 'NEW YORK', 'new york ', None,
+             'Chicago', 'miami', 'Los Angeles'],
+    'Salary': [50000, 60000, np.nan, 50000, 70000, 9999999, 45000, 60000]
+})
+
+# print(df)
+
+# df['Name'] = df['Name'].str.title()
+# print(df)
+
+
+df['Name'] = df['Name'].fillna('Unknown')
+#print(df)
+
+df['Name'] = df['Name'].str.title()
+
+df['Age'] = df.loc[df['Age'] < 120,'Age']
+median_age = df['Age'].median()
+df['Age'] = df['Age'].fillna(median_age)
+
+df['City'] = df['City'].str.strip().fillna('Unknown').str.title()
+
+df['Salary'] = df.loc[df['Salary'] < 100000,'Salary']
+med_sal = df['Salary'].median()
+df['Salary'] = df['Salary'].fillna(med_sal)
+print(df)
