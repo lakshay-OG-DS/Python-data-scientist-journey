@@ -1,0 +1,29 @@
+import pandas as pd
+import numpy as np
+
+df = pd.DataFrame({
+    'Order_ID': [101, 102, 103, 104, 105, 106, 107, 108, 109,110],
+    'Customer_Name': [' alice ', 'BOB', 'Charlie', 'alice', 'David', np.nan, 'Eve', 'BOB', 'Charlie ', 'eve'],
+    'Product': ['Phone', 'laptop', 'PHONE', 'Tablet', 'laptop', 'Phone', 'tablet', 'Laptop', np.nan, 'PHONE'],
+    'Price': [20000, 50000, 20000, np.nan, 50000, 20000, 15000, -50000, 15000, 20000],
+    'Quantity': [1, 1, 2, 1, np.nan, 1, 1, 1, 1, 2],
+    'City': ['Delhi', 'mumbai', 'DELHI', 'Mumbai', 'Delhi', 'Pune', np.nan, 'mumbai', 'Delhi', 'PUNE']
+})
+# invalid value
+df['Price'] = df['Price'].abs()
+# Names
+df['Customer_Name'] = df['Customer_Name'].str.title().str.strip()
+df['Product'] = df['Product'].str.title().str.strip()
+df['City'] = df['City'].str.strip().str.title()
+
+# Nan fillouts
+df['Customer_Name'] = df['Customer_Name'].fillna('Unknown')
+df['City'] = df['City'].fillna('Unknown')
+df['Product'] = df['Product'].fillna('Unknown')
+df['Price'] = df['Price'].fillna(df['Price'].median())
+#Quantity med
+quan_med = df['Quantity'].median()
+df['Quantity'] = df['Quantity'].fillna(quan_med)
+# TOTAL
+df['Total'] = df['Price'] * df['Quantity']
+print(df)
