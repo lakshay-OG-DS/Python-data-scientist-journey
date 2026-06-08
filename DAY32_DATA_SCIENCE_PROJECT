@@ -1,0 +1,112 @@
+import pandas as pd
+import numpy as np
+
+df = pd.DataFrame({
+    'Employee_ID': [101, 102, 103, 103, 104, 105, 106, 107, 108, 109, 110, 111],
+
+    'Name': [
+        ' alice ', 'BOB', 'Charlie', 'Charlie',
+        np.nan, 'David', 'eve', 'EVE ',
+        'Frank', 'Grace', 'grace', 'Henry'
+    ],
+
+    'Age': [
+        25, 30, -5, -5,
+        200, np.nan, 28, 28,
+        22, 35, 35, 17
+    ],
+
+    'Department': [
+        'IT', 'it', 'HR', 'HR',
+        'Finance', 'FINANCE', np.nan, 'Sales',
+        'sales', 'Marketing', 'MARKETING', 'IT'
+    ],
+
+    'Salary': [
+        50000, 60000, 70000, 70000,
+        -10000, np.nan, 55000, 55000,
+        9999999, 65000, 65000, 2000
+    ],
+
+    'Joining_Date': [
+        '2023-01-10',
+        '2023/02/15',
+        '15-03-2023',
+        '15-03-2023',
+        'invalid_date',
+        np.nan,
+        '2023-07-01',
+        '01/08/2023',
+        '2023-13-01',
+        '2023-10-05',
+        '2023-10-05',
+        '2024-01-01'
+    ],
+
+    'Email': [
+        'alice@example.com',
+        'BOB@EXAMPLE.COM',
+        'charlie@example.com',
+        'charlie@example.com',
+        'wrong_email',
+        np.nan,
+        'eve@example.com',
+        'EVE@EXAMPLE.COM',
+        'frank@example',
+        'grace@example.com',
+        'grace@example.com',
+        'henry@example.com'
+    ],
+
+    'Performance_Score': [
+        8, 9, 15, 15,
+        -2, np.nan, 7, 7,
+        10, 6, 6, 11
+    ]
+})
+# Name
+df['Name'] = df['Name'].str.strip()
+df['Name'] = df['Name'].str.title()
+df['Name'] = df['Name'].fillna('Unknown')
+
+# Age
+df['Age'] = df['Age'].fillna(df['Age'].median())
+df['Age'] = df['Age'].where(df['Age'] > 0)
+df['Age'] = df['Age'].where(df['Age'] < 120)
+df['Age'] = df['Age'].fillna(df['Age'].median())
+
+# Department
+df['Department'] = df['Department'].str.title().str.strip()
+df['Department'] = df['Department'].fillna('Unknown')
+
+#Salary
+df['Salary'] = df['Salary'].where(df['Salary'] > 0)
+df['Salary'] = df['Salary'].where(df['Salary'] < 100000)
+df['Salary'] = df['Salary'].fillna(df['Salary'].median())
+
+#Joining_Date
+
+# df['Joining_Date'] = df['Joining_Date'].replace('/',' ')
+df['Joining_Date'] = pd.to_datetime(df['Joining_Date'],errors = 'coerce',dayfirst = True)
+df['Joining_Date'] = df['Joining_Date'].dt.strftime('%y,%m,%d')
+
+#Email
+df['Email'] = df['Email'].str.lower().str.strip()
+mask = df["Email"].str.contains('@',na = False)
+df['Email'] = df['Email'].where(mask,'invalid')
+
+#Performance_Score
+df['Performance_Score'] = df['Performance_Score'].where(df['Performance_Score'] <= 10)
+df['Performance_Score'] = df['Performance_Score'].where(df['Performance_Score'] >= 0)
+df['Performance_Score'] = df['Performance_Score'].fillna(df['Performance_Score'].median())
+
+#groupby
+Average_Salary = df.groupby('Department')['Salary'].agg(['mean','min','max','median'])
+
+Score = df.groupby('Department')['Performance_Score'].mean()
+
+print(df)
+print("="*60)
+print(Average_Salary)
+print("="*60)
+print(Score)
