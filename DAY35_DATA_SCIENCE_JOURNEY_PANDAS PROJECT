@@ -1,0 +1,114 @@
+import pandas as pd
+
+df = pd.read_csv('diabetes.csv')
+
+# removing invalid inputs
+
+# USING WHERE to remove invalid input
+
+# pregnancies
+
+df['Pregnancies'] = df['Pregnancies'].where(df['Pregnancies'] <= 15)
+
+df['Pregnancies'] = df['Pregnancies'].where(df['Pregnancies'] >= 0)
+
+# glucose
+
+df['Glucose'] = df['Glucose'].where(df['Glucose'] <= 200)
+
+df['Glucose'] = df['Glucose'].where(df['Glucose'] > 0 )
+
+# Blood pressure bp
+
+df['BloodPressure'] = df['BloodPressure'].where(df['BloodPressure'] >= 40)
+
+df['BloodPressure'] = df['BloodPressure'].where(df['BloodPressure'] < 140 )
+
+#Skin thickness
+
+df['SkinThickness'] = df['SkinThickness'].where(df['SkinThickness'] > 0)
+
+df['SkinThickness'] = df['SkinThickness'].where(df['SkinThickness'] < 55)
+
+# insulin
+
+df['Insulin'] = df['Insulin'].where(df['Insulin'] > 0)
+
+df['Insulin'] = df['Insulin'].where(df['Insulin'] < 400)
+
+# Bmi ( body mass index)
+
+df['BMI'] = df['BMI'].where(df['BMI'] > 15)
+
+df['BMI'] = df['BMI'].where(df['BMI'] < 60)
+
+# DIABETESPedegreefunction
+
+df['DiabetesPedigreeFunction'] = df['DiabetesPedigreeFunction'].where(df['DiabetesPedigreeFunction'] > 0 )
+
+df['DiabetesPedigreeFunction'] = df['DiabetesPedigreeFunction'].where(df['DiabetesPedigreeFunction'] <= 2.45 )
+
+# Age
+
+df['Age'] = df['Age'].where(df['Age'] > 18 )
+
+df['Age'] = df['Age'].where(df['Age'] <= 100)
+
+# Outcome
+
+def yn(p):
+	if p == 1:
+		return 'diabetes'
+	if p == 0:
+		return 'No diabetes'
+	return p
+
+df['Outcome'] = df['Outcome'].apply(yn)
+
+
+# NOW NAN FILLOUTS
+
+df['Pregnancies'] = df['Pregnancies'].fillna(df['Pregnancies'].median())
+
+df['Glucose'] = df['Glucose'].fillna(df['Glucose'].median())
+
+df['BloodPressure'] = df['BloodPressure'].fillna(df['BloodPressure'].median())
+
+df['Insulin'] = df['Insulin'].fillna(df['Insulin'].median())
+
+df['BMI'] = df['BMI'].fillna(df['BMI'].median())
+
+df['SkinThickness'] = df['SkinThickness'].fillna(df['SkinThickness'].median())
+
+df['DiabetesPedigreeFunction'] = df['DiabetesPedigreeFunction'].fillna(df['DiabetesPedigreeFunction'].median())
+
+df['Age'] = df['Age'].fillna(df['Age'].median())
+
+# Analysis
+
+# average pregnancy with age 
+
+pregnancy_with_age = df.groupby('Age')['Pregnancies'].mean()
+
+# highest and lowest blood pressure 
+
+h_bp = df['BloodPressure'].max()
+
+l_bp = df['BloodPressure'].min()
+
+
+# CALLS FOR THE FUNCTIONS(def) AND CODE
+
+print(df.head(50))
+
+print('='*60)
+
+print('AVERAGE PREGNANCY IN THE AGE ARE - \n',pregnancy_with_age)
+
+print('='*60)
+
+print('Highest blood pressure - ',h_bp)
+
+print('lowest blood pressure - ',l_bp)
+
+# hope you like it
