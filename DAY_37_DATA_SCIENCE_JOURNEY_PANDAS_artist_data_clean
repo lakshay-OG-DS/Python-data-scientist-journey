@@ -1,0 +1,71 @@
+# cleaning and reparing data
+
+# the names title
+df['name'] = df['name'].str.title()
+
+# case NaN fillouts
+df['name'] = df['name'].fillna('Unknown')
+df['followers'] = df['followers'].fillna(df['followers'].median())
+df['popularity'] = df['popularity'].fillna(df['popularity'].median())
+
+# function
+def gen(x):
+    if x == []:
+        return "unknown"
+    else:
+        return (x)
+
+df['genres'] = df['genres'].apply(gen) # applying function
+
+# just in case NaN fillout
+# df['main_genre'] = df['main_genre'].fillna('unknown')
+
+# analysis of the data
+
+# average followers
+avg_f = df['followers'].mean()
+
+# max and min followers
+max_f = df['followers'].max()
+min_f = df['followers'].min()
+
+# Numbers of artist with more than 1000000 followers
+popul = df['followers'].where(df['followers'] > 1000000).dropna()
+popular_art = len(popul)
+
+# genre
+
+# types of genre
+genr_ng = df['main_genre'].drop_duplicates() # not printing this
+genre_l = len(df['main_genre'].drop_duplicates())
+
+# artist over 1000000 followers and their genre
+df_follow = df[df['followers'] > 1000000]
+art_top = df_follow.groupby('main_genre')['name'].agg(list)
+artist_over = art_top.drop_duplicates()
+
+# artist with most and least popularity
+most_popularity = df.sort_values('popularity', ascending = False).head(1)[['name', 'popularity']]
+least_popularity = df.sort_values('popularity', ascending = True).head(1)[['name', 'popularity']]
+
+# analysis done
+
+# now calls for the commands
+print(df)
+print('='*60)
+print(avg_f)
+print('='*60)
+print(max_f)
+print('='*60)
+print(min_f)
+print('='*60)
+print(popular_art)
+print('='*60)
+print(genre_l)
+print('='*60)
+print(artist_over)
+print('='*60)
+print(most_popularity)
+print('='*60)
+print(least_popularity)
+
