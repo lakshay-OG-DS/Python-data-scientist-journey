@@ -1,0 +1,81 @@
+#print(df['Age'].head(35))
+#print('='*60)
+#print(df['Age'].tail(35))
+
+# clearing age invalid and replacing with median()
+df['Age'] = df['Age'].where((df['Age'] >= 18 ) & (df['Age'] <= 120))
+df['Age'] = df['Age'].fillna(df['Age'].median())
+
+
+#print(df['Gender'].head(35))
+#print('='*60)
+#print(df['Gender'].tail(35))
+
+# gender is fine
+
+#int(df['Height_cm'].head(35))
+#print('='*60)
+#print(df['Height_cm'].tail(35))
+
+# height in cm is fine too
+
+
+# weight in kg
+
+#print(df['Weight_kg'].head(35))
+#print('='*60)
+#print(df['Weight_kg'].tail(35)
+
+# weight is fine 
+
+#print(df['BMI'].head(35))
+#print('='*60)
+#print(df['BMI'].tail(35
+
+# BMI is clean too
+
+# now every thing is fine
+
+# analyze
+
+# number of male
+m_count = len(df[df['Gender'] == 'Male'])
+f_count = len(df[df['Gender'] == 'Female'])
+non_b_count = len(df[df['Gender'] == 'Non-binary'])
+
+
+# early waker
+
+# number of people wakng early
+e_waker = len(df[df['Early_Waker'] == 'Yes'])
+
+#vaverge height and weight
+avg_w = df['Weight_kg'].mean()
+
+avg_h = df['Height_cm'].mean()
+
+# over weighted people
+
+ow_p = len(df[df['Weight_kg'] > 77])
+
+print(f'number of males working are {m_count}')
+
+print('='*60)
+
+print(f'number of females working are {f_count}')
+
+print('='*60)
+
+print(f'number of non binary working are {non_b_count}')
+
+print('='*60)
+
+print('number of people waking up early',e_waker)
+
+print('='*60)
+
+print(f'average height of people is {avg_h} & average weight of people is {avg_w}')
+
+print('='*60)
+
+print(f'number of overweighted peoples {ow_p}')
