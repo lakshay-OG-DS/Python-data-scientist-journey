@@ -1,0 +1,173 @@
+# This Python 3 environment comes with many helpful analytics libraries installed
+# It is defined by the kaggle/python Docker image: https://github.com/kaggle/docker-python
+# For example, here's several helpful packages to load
+
+import numpy as np # linear algebra
+import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
+
+# Input data files are available in the read-only "../input/" directory
+# For example, running this (by clicking run or pressing Shift+Enter) will list all files under the input directory
+
+import os
+for dirname, _, filenames in os.walk('/kaggle/input'):
+    for filename in filenames:
+        print(os.path.join(dirname, filename))
+
+# You can write up to 20GB to the current directory (/kaggle/working/) that gets preserved as output when you create a version using "Save & Run All" 
+# You can also write temporary files to /kaggle/temp/, but they won't be saved outside of the current session
+
+# Use the kagglehub client library to attach Kaggle resources like competitions, datasets, and models to your session
+# Learn more about kagglehub: https://github.com/Kaggle/kagglehub/blob/main/README.md
+
+import kagglehub
+# kagglehub.dataset_download('<owner>/<dataset-slug>')
+
+
+df = pd.read_csv('/kaggle/input/datasets/roninzz/early-wakeup-dataset/early_wakeup_health_dataset (1).csv')
+print(df)
+
+
+# nothing wrong with this dataset just need analysis
+
+# number of males and female and non-binary in data
+
+Gender_count = df['Gender'].value_counts()
+
+# average height 
+
+avg_h = df['Height_cm'].mean()
+
+# average weight 
+
+avg_w = df['Weight_kg'].mean()
+
+# number of peoples with more than average height and weight
+
+mtavg_w = len(df['Weight_kg'].where(df['Weight_kg'] > 73.5).dropna()) # mtavg = more than average
+
+mtavg_h = len(df['Height_cm'].where(df['Height_cm'] > 168.4).dropna())
+
+# average BMI 
+
+avg_BMI = df['BMI'].mean()
+
+#  max and min height 
+
+max_h = df['Height_cm'].max()
+
+min_h = df['Height_cm'].min()
+
+# max and min weight 
+max_w = df['Weight_kg'].max()
+
+min_w = df['Weight_kg'].min()
+  
+# obesity rist
+obs_count = df['Obesity_Risk'].value_counts()
+
+# most normal wake up time
+wk_n = df['Wake_Up_Time'].mode()
+
+# marital status 
+m_s = df['Marital_Status'].value_counts()
+
+# early wakers
+e_waker = df['Early_Waker'].value_counts()
+
+sleep_dis = df['Sleep_Disorder_Risk'].value_counts()
+
+# Fitness level of peoples
+fit_lv = df['Fitness_Level'].value_counts()
+
+# diabetes risk
+diabetes_r = df['Diabetes_Risk'].value_counts()
+
+# country bmi 
+
+country_bmi = df.groupby('Country')['BMI'].mean()
+
+# avg gender height
+
+gender_h = df.groupby('Gender')['Height_cm'].mean()
+
+# avg gender weight
+
+gender_w = df.groupby('Gender')['Weight_kg'].mean()
+
+# occupation wake up time
+occ_wkt = df.groupby('Occupation')['Wake_Up_Time'].agg(list)
+
+
+print(Gender_count)
+
+print('='*60)
+
+print('Average height of peoples',avg_h)
+
+print('='*60)
+
+print('Average weight of people',avg_w)
+
+print('='*60)
+
+print('average BMI',avg_BMI)
+
+print('='*60)
+
+print('number of peoples with more than average weight : ',mtavg_w)
+
+print('='*60)
+
+print('number of peoples with more than average height :',mtavg_h)
+
+print('='*60)
+
+print('max weight :',max_w)
+print('max height: ',max_h)
+print('min_weight:',min_w)
+print('min height :',min_h)
+
+print('='*60)
+
+print(obs_count)
+
+print('='*60)
+
+print('mosy normal wake up time',wk_n)
+
+print('='*60)
+
+print(m_s)
+
+print('='*60)
+
+print(e_waker)
+
+print('='*60)
+
+print(sleep_dis)
+
+print('='*60)
+
+print(fit_lv)
+
+print('='*60)
+
+print(diabetes_r)
+
+print('='*60)
+
+print(country_bmi)
+
+print('='*60)
+
+print(gender_h)
+
+print('='*60)
+
+print(gender_w)
+
+print('='*60)
+
+print(occ_wkt)
+
