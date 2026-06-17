@@ -1,0 +1,147 @@
+# the total number of pokemons 
+total_p = df['number'].drop_duplicates()
+
+# total number of type
+types = (df['type1'] + ' ' + df['type2']).fillna('no_type')
+
+total_types = types.value_counts()
+
+# average health point of pokemons
+avg_hp = df['hp'].mean()
+
+# max hp 
+max_hp = df['hp'].max()
+
+# min hp
+
+min_hp = df['hp'].min()
+
+# average atttack point of pokemons
+avg_at = df['attack'].mean()
+
+# max attack
+max_at  = df['attack'].max()
+
+# min attack
+
+min_at = df['attack'].min()
+
+# def points 
+
+avg_def = df['defense'].mean()
+
+# max def 
+max_def = df['defense'].max()
+
+# min def
+
+min_def = df['defense'].min()
+
+# average sp def point of pokemons
+
+avg_spdef = df['sp_defense'].mean()
+
+# max hp 
+max_spdef = df['sp_defense'].max()
+
+# min hp
+
+min_spdef = df['sp_defense'].min()
+
+# average sp attack point of pokemons
+avg_spat = df['sp_attack'].mean()
+
+# max sp  attack
+max_spat = df['sp_attack'].max()
+
+# min sp attack
+
+min_spat = df['sp_attack'].min()
+
+# average speed point of pokemons
+avg_sp = df['speed'].mean()
+
+# max speed
+max_sp = df['speed'].max()
+
+# min speed
+
+min_sp = df['speed'].min()
+
+# number of pokemons from each generation
+
+all_gen =(df['generation'].value_counts())
+
+# legendry pokemons
+legendary_p = len(df[df['legendary'] == True])
+
+# generation and names
+
+p_gen = df.groupby('generation')['name'].agg(list)
+
+
+print('total number of types in data \n ',(total_types))
+
+print('='*60)
+
+print('The total number of pokemons are :',len(total_p))
+
+print('='*60)
+
+print('average hp of pokemons : ',avg_hp)
+
+print('maximum hp is :',max_hp)
+
+print('minimum hp is :',min_hp)
+
+print('='*60)
+
+print('average attack point of pokemon : ',avg_at)
+
+print('maximum attack of pokemon:',max_at)
+
+print('minimum attack of ppokemon : ',min_at)
+
+print('='*61)
+
+print('avg_defense points : ',avg_def)
+
+print('max defense point:',max_def)
+
+print('min defense point',min_def) 
+
+print('='*60)
+
+print('average spdef:',avg_spdef)
+
+print('maximum sp defense:',max_spdef)
+
+print('minimum sp defense :', min_spdef)
+
+print('='*60)
+
+print('average sp attak:',avg_spat)
+
+print('maximum sp attack :',max_spat)
+
+print('minimum sp attack :',min_spat)
+
+print('='*60)
+
+print('average speed :',avg_sp)
+
+print('maximum speed :',max_sp)
+
+print('minimum speed :',min_sp)
+
+print('='*60)
+
+print((all_gen))
+
+print('='*60)
+
+print('number of legendary pokemons is : ',legendary_p)
+
+print('='*60)
+
+print(p_gen)
