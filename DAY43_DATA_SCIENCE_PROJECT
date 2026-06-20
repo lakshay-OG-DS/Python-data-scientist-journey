@@ -1,0 +1,269 @@
+# This Python 3 environment comes with many helpful analytics libraries installed
+# It is defined by the kaggle/python Docker image: https://github.com/kaggle/docker-python
+# For example, here's several helpful packages to load
+
+import numpy as np # linear algebra
+import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
+import matplotlib.pyplot as plt
+# Input data files are available in the read-only "../input/" directory
+# For example, running this (by clicking run or pressing Shift+Enter) will list all files under the input directory
+
+import os
+for dirname, _, filenames in os.walk('/kaggle/input'):
+    for filename in filenames:
+        print(os.path.join(dirname, filename))
+
+# You can write up to 20GB to the current directory (/kaggle/working/) that gets preserved as output when you create a version using "Save & Run All" 
+# You can also write temporary files to /kaggle/temp/, but they won't be saved outside of the current session
+
+# Use the kagglehub client library to attach Kaggle resources like competitions, datasets, and models to your session
+# Learn more about kagglehub: https://github.com/Kaggle/kagglehub/blob/main/README.md
+
+import kagglehub
+# kagglehub.dataset_download('<owner>/<dataset-slug>')
+/kaggle/input/datasets/roninzz/carrrssss/v1-legacy-carapi-datafeed-sample.csv
+df = pd.read_csv('/kaggle/input/datasets/roninzz/carrrssss/v1-legacy-carapi-datafeed-sample.csv')
+print(df)
+       Make Id Make Name  Model Id Model Name  Trim Id  Trim Year  \
+0            1     Acura        97        ILX     6292       2020   
+1            1     Acura        97        ILX     6295       2020   
+2            1     Acura        97        ILX     6293       2020   
+3            1     Acura        97        ILX     6296       2020   
+4            1     Acura        97        ILX     6294       2020   
+...        ...       ...       ...        ...      ...        ...   
+17702       23     Volvo       589       XC70    23951       2015   
+17703       23     Volvo       589       XC70    23950       2015   
+17704       23     Volvo       589       XC70    23949       2015   
+17705       23     Volvo       589       XC70    23954       2015   
+17706       23     Volvo       589       XC70    23953       2015   
+
+                            Trim Name  \
+0                                Base   
+1         Premium and A-SPEC Packages   
+2                     Premium Package   
+3      Technology and A-SPEC Packages   
+4                  Technology Package   
+...                               ...   
+17702                             3.2   
+17703                      T5 Drive-E   
+17704                      T5 Drive-E   
+17705                              T6   
+17706                              T6   
+
+                                        Trim Description  Trim Msrp  \
+0                              4dr Sedan (2.4L 4cyl 8AM)      25900   
+1      Premium and A-SPEC Packages 4dr Sedan (2.4L 4c...      29750   
+2              Premium Package 4dr Sedan (2.4L 4cyl 8AM)      27750   
+3      Technology and A-SPEC Packages 4dr Sedan (2.4L...      31650   
+4           Technology Package 4dr Sedan (2.4L 4cyl 8AM)      29650   
+...                                                  ...        ...   
+17702                   3.2 4dr Wagon AWD (3.2L 6cyl 6A)      36900   
+17703          T5 Drive-E 4dr Wagon (2.0L 4cyl Turbo 8A)      36050   
+17704          T5 Drive-E 4dr Wagon (2.0L 4cyl Turbo 8A)      35400   
+17705              T6 4dr Wagon AWD (3.0L 6cyl Turbo 6A)      42050   
+17706              T6 4dr Wagon AWD (3.0L 6cyl Turbo 6A)      41800   
+
+       Trim Invoice  ... Mileage Epa Highway Mpg Mileage Range City  \
+0           24617.0  ...                    34.0              317.0   
+1           28264.0  ...                    34.0              317.0   
+2           26370.0  ...                    34.0              317.0   
+3           30064.0  ...                    34.0              317.0   
+4           28169.0  ...                    34.0              317.0   
+...             ...  ...                     ...                ...   
+17702       34686.0  ...                    25.0              333.0   
+17703       33887.0  ...                    31.0              444.0   
+17704       33276.0  ...                    31.0              444.0   
+17705       39527.0  ...                    24.0              315.0   
+17706       39292.0  ...                    24.0              315.0   
+
+       Mileage Range Highway Mileage Epa Combined Mpg Electric  \
+0                      449.0                               NaN   
+1                      449.0                               NaN   
+2                      449.0                               NaN   
+3                      449.0                               NaN   
+4                      449.0                               NaN   
+...                      ...                               ...   
+17702                  463.0                               NaN   
+17703                  574.0                               NaN   
+17704                  574.0                               NaN   
+17705                  444.0                               NaN   
+17706                  444.0                               NaN   
+
+      Mileage Epa City Mpg Electric Mileage Epa Highway Mpg Electric  \
+0                               NaN                              NaN   
+1                               NaN                              NaN   
+2                               NaN                              NaN   
+3                               NaN                              NaN   
+4                               NaN                              NaN   
+...                             ...                              ...   
+17702                           NaN                              NaN   
+17703                           NaN                              NaN   
+17704                           NaN                              NaN   
+17705                           NaN                              NaN   
+17706                           NaN                              NaN   
+
+       Mileage Range Electric  Mileage Epa Kwh 100 Mi Electric  \
+0                         NaN                              NaN   
+1                         NaN                              NaN   
+2                         NaN                              NaN   
+3                         NaN                              NaN   
+4                         NaN                              NaN   
+...                       ...                              ...   
+17702                     NaN                              NaN   
+17703                     NaN                              NaN   
+17704                     NaN                              NaN   
+17705                     NaN                              NaN   
+17706                     NaN                              NaN   
+
+       Mileage Epa Time To Charge Hr 240v Electric  \
+0                                              NaN   
+1                                              NaN   
+2                                              NaN   
+3                                              NaN   
+4                                              NaN   
+...                                            ...   
+17702                                          NaN   
+17703                                          NaN   
+17704                                          NaN   
+17705                                          NaN   
+17706                                          NaN   
+
+       Mileage Battery Capacity Electric  
+0                                    NaN  
+1                                    NaN  
+2                                    NaN  
+3                                    NaN  
+4                                    NaN  
+...                                  ...  
+17702                                NaN  
+17703                                NaN  
+17704                                NaN  
+17705                                NaN  
+17706                                NaN  
+
+[17707 rows x 57 columns]
+'''
+This data is about the car sales ,their mileage on highway their ranges and the trims produced in a year
+also the price company sells and the price in market by showrooms
+'''
+
+# sum of the NaN values in the whole data
+
+nul = df.isna().sum()
+
+# describing data it gives the statistics
+desc = df.describe()
+
+# total trims produced per year data 
+
+trim_years = df['Trim Year'].drop_duplicates() # removing duplicates 
+
+# trim average price in market 
+
+trim_avg = df['Trim Msrp'].mean()
+
+# the year most trims produced 
+
+most_ty = df['Trim Year'].mode()
+
+# maximum minimum and average price of trim 
+
+trim_price = df['Trim Msrp'].agg(['min','max','mean'])
+
+# trim invoice mean min and max
+
+df['Trim Invoice'] = pd.to_numeric(df['Trim Invoice'],errors = 'coerce') # converting string to the float 
+
+trim_inv = df['Trim Invoice'].agg(['mean','min','max']) # trim invoice is the company price
+
+# avg  Mileage Epa Highway Mpg 
+
+print(df['Mileage Epa Highway Mpg'].dtype) # checking the data type
+
+df['Mileage Epa Highway Mpg'] = pd.to_numeric(df['Mileage Epa Highway Mpg'],errors = 'coerce')
+
+avg_mpg = df['Mileage Epa Highway Mpg'].agg(['mean','min','max']) 
+
+# id and year groupby average
+
+id_year_groupby = df.groupby('Trim Id')['Trim Year'].mean()
+
+# minimum mileage range highway
+
+df['Mileage Range Highway'] = pd.to_numeric(df['Mileage Range Highway'] , errors = 'coerce')
+
+mileage_range = df['Mileage Range Highway'].agg(['mean','min','max'])
+
+# profit to the showroom
+profit =(df['Trim Msrp'] - df['Trim Invoice']).agg(['mean','min','max'])
+
+# Corr
+correlation = df[['Trim Msrp','Trim Invoice']].corr()
+
+
+# command call
+
+print(nul)
+
+print('='*60)
+
+print(desc)
+
+print('='*60)
+
+print(df.info())
+
+print('='*60)
+
+print(df['Make Name'].value_counts())
+
+print('='*60)
+
+print(trim_years)
+
+print('='*60)
+
+print(trim_avg)
+
+print('='*60)
+
+print(most_ty)
+
+print('='*60)
+
+print(trim_price)
+
+print('='*60)
+
+print(trim_inv)
+
+print('='*60)
+
+print(avg_mpg)
+
+print('='*60)
+
+print(id_year_groupby)
+
+print('='*60)
+
+print(mileage_range)
+
+print('='*60)
+
+print(profit)
+
+print('='*60)
+
+print(correlation)
+# plotting 
+plt.plot(df['Mileage Epa Highway Mpg'],df['Mileage Range Highway'],color = '#14d9d2')
+plt.xlabel('mileage per gallon')
+plt.ylabel('range on highway')
+plt.title('mileage range vs mileage mpg')
+plt.show()
+
+plt.plot(df['Trim Msrp'],df['Trim Invoice'],color = 'orange')
+plt.xlabel('price of market')
+plt.ylabel('company price')
+plt.title('market price vs company price')
