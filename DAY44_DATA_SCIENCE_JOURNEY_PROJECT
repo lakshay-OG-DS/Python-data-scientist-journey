@@ -1,0 +1,164 @@
+df = pd.read_csv('/kaggle/input/datasets/roninzz/dddgdgdgdgdgddg/fifa_player_performance_market_value.csv')
+print(df)
+      player_id  player_name  age  nationality             club position  \
+0             1     Player_1   23      Germany        Liverpool       ST   
+1             2     Player_2   36      England     FC Barcelona       ST   
+2             3     Player_3   31       France         Juventus       RB   
+3             4     Player_4   27     Portugal  Manchester City       LW   
+4             5     Player_5   24       Brazil        Liverpool      CDM   
+...         ...          ...  ...          ...              ...      ...   
+2795       2796  Player_2796   32      Germany    Bayern Munich       CB   
+2796       2797  Player_2797   31  Netherlands      Real Madrid       LB   
+2797       2798  Player_2798   31       Brazil  Manchester City       ST   
+2798       2799  Player_2799   22  Netherlands      Real Madrid       ST   
+2799       2800  Player_2800   31      Germany        Liverpool      CDM   
+
+      overall_rating  potential_rating  matches_played  goals  assists  \
+0                 65                87               8      6       14   
+1                 90                76              19      3       18   
+2                 75                91              34     12       15   
+3                 90                86              35     18       13   
+4                 84                96              41      6        6   
+...              ...               ...             ...    ...      ...   
+2795              67                65              47     10       12   
+2796              67                85               5      7        1   
+2797              93                88               8     36        8   
+2798              75                73              34      7        6   
+2799              72                90               7     11       12   
+
+      minutes_played  market_value_million_eur  contract_years_left  \
+0               2976                    122.51                    3   
+1               2609                     88.47                    5   
+2               1158                     20.24                    3   
+3                145                    164.29                    0   
+4               2226                    121.34                    4   
+...              ...                       ...                  ...   
+2795            4067                     99.49                    3   
+2796            3460                     74.87                    4   
+2797            3768                     27.01                    3   
+2798            1934                     54.95                    4   
+2799            2319                     44.83                    5   
+
+     injury_prone transfer_risk_level  
+0              No                 Low  
+1              No                High  
+2              No              Medium  
+3             Yes              Medium  
+4              No                 Low  
+...           ...                 ...  
+2795           No              Medium  
+2796           No                 Low  
+2797           No              Medium  
+2798           No              Medium  
+2799          Yes                 Low  
+
+[2800 rows x 16 columns]
+''' 
+This data is about the market value of fifa players according to their stats 
+with their infortmation such as nationality,club and age
+'''
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+print(df.describe())
+
+print('--'*90)
+
+print(df.info())
+
+print('--'*90)
+
+print(df.isnull().sum())
+
+print('--'*90)
+
+# total number of country players are from in data
+
+country_count = len(df['nationality'].value_counts())
+
+print(f'the total number of countries participating is : {country_count}')
+
+
+# -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+print('--'*90)
+#------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# Ages less then or equal to 30 and more than or equal to 30
+
+age_more_than_30 = len(df['age'].where(df['age'] > 30).dropna())
+age_less_than_30 = len(df['age'].where(df['age'] <= 30).dropna())
+
+print(f'number of player with age more than 30 : {age_more_than_30}')
+print(f'number of player with age less than or equal to 30 : {age_less_than_30}')
+
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+print('--'*90)
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# number of clubs 
+
+num_club = df['club'].value_counts()
+
+print(num_club)
+
+# value count of positions of players
+positions = df['position'].value_counts()
+
+print(positions)
+
+# average max min rating of players
+
+rating_ev = df['overall_rating'].agg(['mean','max','min'])
+potential_ev = df['potential_rating'].agg(['mean','max','min'])
+worth = df['market_value_million_eur'].agg(['mean','max','min'])
+
+print('--'*90)
+
+print(rating_ev)
+
+print('--'*90)
+
+print(potential_ev)
+
+print('--'*90)
+
+print(worth)
+
+print('--'*90)
+
+
+#--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# player with injury
+
+inj = (df['injury_prone'] == 'Yes').sum()
+print(inj)
+
+ # trnasfer risk count
+tr_c = df['transfer_risk_level'].value_counts()
+
+print(tr_c)
+
+#-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# plotting
+
+plt.bar(df['overall_rating'],df['potential_rating'], color = 'pink',alpha = 0.5)
+plt.title('Overall rating vs Potential rating')
+plt.xlabel('potential')
+plt.ylabel('overall')
+plt.show()
+
+
+plt.bar(df['goals'],df['assists'],color = 'green')
+plt.title('goals and assists')
+plt.xlabel('goals')
+plt.ylabel('assist')
+plt.show()
+
+
+
+'''
+So overall in this data we discovered the minimum maximum and average values of data there are 8 countries with 2800 players 
+we found the number of clubs and number of positions like st lw lp , this data set is of fifa 2026 market value of players each
+player have diffrent stat and diffrent values after this we found how many players are injured and how many are not aand with 2 edf graph we found the goal vs assists
+and overall vs potential ratings , there are 1106 players with the age above 30 and 1694 less than or equal to 30 
+overall this data shows the craze of football in world right now this year
+'''
