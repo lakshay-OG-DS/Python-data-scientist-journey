@@ -1,0 +1,32 @@
+import pandas as pd 
+import matplotlib.pyplot as plt
+import numpy as np
+import sqlite3
+
+print(sqlite3.sqlite_version)
+
+conn = sqlite3.connect('customer.db')
+
+cur = conn.cursor()
+
+cur.execute(""" 
+            CREATE TABLE IF NOT EXISTS customers (
+            first_name TEXT,
+            last_name TEXT,
+            email TEXT
+  )""")
+
+many_customers = [
+          ('brown', 'munday', 'ngaboss@gmail.com'),
+          ('ramesh','babu','darkboy@gmail.com')
+                  ]
+
+cur.execute('SELECT * from customers')
+print(cur.fetchall())
+
+cur.executemany("INSERT INTO customers VALUES  (?,?,?)  ",many_customers)
+
+
+conn.commit()
+
+conn.close()
