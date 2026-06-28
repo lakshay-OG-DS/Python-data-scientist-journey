@@ -1,0 +1,435 @@
+# This Python 3 environment comes with many helpful analytics libraries installed
+# It is defined by the kaggle/python Docker image: https://github.com/kaggle/docker-python
+# For example, here's several helpful packages to load
+import numpy as np # linear algebra
+import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
+import matplotlib.pyplot as plt
+import seaborn as sns
+import sqlite3
+# Input data files are available in the read-only "../input/" directory
+# For example, running this (by clicking run or pressing Shift+Enter) will list all files under the input directory
+
+import os
+for dirname, _, filenames in os.walk('/kaggle/input'):
+    for filename in filenames:
+        print(os.path.join(dirname, filename))
+
+# You can write up to 20GB to the current directory (/kaggle/working/) that gets preserved as output when you create a version using "Save & Run All" 
+# You can also write temporary files to /kaggle/temp/, but they won't be saved outside of the current session
+
+# Use the kagglehub client library to attach Kaggle resources like competitions, datasets, and models to your session
+# Learn more about kagglehub: https://github.com/Kaggle/kagglehub/blob/main/README.md
+
+import kagglehub
+# kagglehub.dataset_download('<owner>/<dataset-slug>')
+/kaggle/input/datasets/roninzz/chocolate-sales/Chocolate_Sales.csv
+This data is about the chocolate sales in year 2022 and 2023
+The total number of rows present in data are : 199999
+For the first task i will print the data in txt form
+df = pd.read_csv('/kaggle/input/datasets/roninzz/chocolate-sales/Chocolate_Sales.csv')
+print(df)
+          Order_ID             Product    Country    Channel    Salesperson  \
+0       ORD-069833    Truffle Gift Box  Australia     Retail    Arjun Mehta   
+1       ORD-090726        85% Dark Bar  Australia     Retail    Arjun Mehta   
+2       ORD-042159        70% Dark Bar      Japan     Retail  Hannah Müller   
+3       ORD-197166   Hazelnut Milk Bar    Germany     Retail    Arjun Mehta   
+4       ORD-112162   Almond Crunch Bar  Australia     Retail      Yuki Sato   
+...            ...                 ...        ...        ...            ...   
+199995  ORD-053460        70% Dark Bar  Australia     Retail  Beatriz Souza   
+199996  ORD-010743    Truffle Gift Box      India  Wholesale    Arjun Mehta   
+199997  ORD-049690  Salted Caramel Bar      Japan     Online    Arjun Mehta   
+199998  ORD-189637        85% Dark Bar      Japan  Wholesale    Rohan Patel   
+199999  ORD-061616       Mint Dark Bar  Australia     Retail  Hannah Müller   
+
+        Order_Date  Discount_Pct  Price_per_Box  Marketing_Spend  \
+0       2022-12-11           3.5          13.72           202.03   
+1       2023-03-14           9.4           3.30            55.18   
+2       2023-12-21           4.9          18.21            60.65   
+3       2023-12-18          15.0           2.66            52.00   
+4       2023-08-18           4.4           2.75           187.44   
+...            ...           ...            ...              ...   
+199995  2022-05-27          10.6           3.39           186.19   
+199996  2022-09-06          17.3           3.07            42.28   
+199997  2022-06-16          18.3           2.74           100.19   
+199998  2022-10-14           9.3          14.30            29.96   
+199999  2022-01-25           7.2           3.01           270.86   
+
+        Boxes_Shipped  Amount  
+0                  71  912.31  
+1                  84  245.91  
+2                  35   583.7  
+3                  92  211.27  
+4                 214  549.69  
+...               ...     ...  
+199995            125  418.56  
+199996            148  366.47  
+199997            149  329.79  
+199998             24  304.51  
+199999            131  366.91  
+
+[200000 rows x 11 columns]
+so my second task is to check if there are any null values of not
+and with this cell i will also check the info and describe function
+dfnull = df.isnull().sum()
+
+dftotal_null = dfnull.sum()
+
+print(dfnull)
+
+print('--'*90)
+
+print(dftotal_null)
+Order_ID             0
+Product              0
+Country              0
+Channel              0
+Salesperson          0
+Order_Date         437
+Discount_Pct       489
+Price_per_Box      457
+Marketing_Spend    461
+Boxes_Shipped        0
+Amount               0
+dtype: int64
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+1844
+As a result we got the null values in the data
+there are 1844 values with NaN
+now we will use info and describe function
+df_stats = df.describe()
+
+print(df.info())
+
+print('--'*90)
+
+print(df_stats)
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 200000 entries, 0 to 199999
+Data columns (total 11 columns):
+ #   Column           Non-Null Count   Dtype  
+---  ------           --------------   -----  
+ 0   Order_ID         200000 non-null  object 
+ 1   Product          200000 non-null  object 
+ 2   Country          200000 non-null  object 
+ 3   Channel          200000 non-null  object 
+ 4   Salesperson      200000 non-null  object 
+ 5   Order_Date       199563 non-null  object 
+ 6   Discount_Pct     199511 non-null  float64
+ 7   Price_per_Box    199543 non-null  float64
+ 8   Marketing_Spend  199539 non-null  float64
+ 9   Boxes_Shipped    200000 non-null  int64  
+ 10  Amount           200000 non-null  object 
+dtypes: float64(3), int64(1), object(7)
+memory usage: 16.8+ MB
+None
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        Discount_Pct  Price_per_Box  Marketing_Spend  Boxes_Shipped
+count  199511.000000  199543.000000    199539.000000  200000.000000
+mean       13.107457       5.911507        95.450141     139.584105
+std         6.374477       4.954976        66.243760     118.665393
+min         0.000000       2.040000         4.300000   -1642.000000
+25%         8.300000       2.950000        52.270000      67.000000
+50%        12.600000       3.280000        78.850000     113.000000
+75%        17.500000       4.570000       118.710000     180.000000
+max        38.300000      21.650000       798.222443    3811.000000
+the result says that there are 4 coloms wth null values
+in this data set there are colomn of - order id, ordder date , product , country , channel , sales person , discount , price per box , marketing spend , boxes shipped , amount
+In this cell i will do analysis of them
+# print(df['Discount_Pct'].tail(55))
+# print(df['Discount_Pct'].head(55))
+
+df['Discount_Pct'] = df['Discount_Pct'].fillna(df['Discount_Pct'].median())
+df['Discount_Pct'] = df['Discount_Pct'].where((df['Discount_Pct'] <= 100) & (df['Discount_Pct'] >= 0))
+
+
+
+# assuming the chocolate as cheap one i will treat 5 and 4 min mean price as normal
+
+df['Price_per_Box'] = df['Price_per_Box'].fillna(df['Price_per_Box'].median())
+
+# print(df['Marketing_Spend'].head(60))
+# print(df['Marketing_Spend'].tail(60))
+
+df['Marketing_Spend'] = df['Marketing_Spend'].fillna(df['Marketing_Spend'].median())
+
+df['Order_Date'] =  df['Order_Date'].fillna('Unknown')
+
+# print(df['Boxes_Shipped'].head(60))
+# print(df['Boxes_Shipped'].tail(60))
+
+df['Boxes_Shipped'] = df['Boxes_Shipped'].where(df['Boxes_Shipped'] > 0).fillna(df['Boxes_Shipped'].median())
+
+# print(df['Boxes_Shipped'].min())
+
+#  print(df['Amount'].dtype)
+
+df['Amount'] = pd.to_numeric(df['Amount'] , errors = 'coerce')
+
+#  print(df['Amount'].dtype)
+
+print(df['Amount'].dtype)
+
+print(df['Amount'].head(10))
+
+
+df['Amount'] = df['Amount'].fillna(df['Amount'].median())
+print(df['Amount'].isnull().sum())
+float64
+0    912.31
+1    245.91
+2    583.70
+3    211.27
+4    549.69
+5    527.01
+6    470.63
+7    629.51
+8    181.16
+9    588.18
+Name: Amount, dtype: float64
+0
+''' So after analyse the results - we can see there is a big diffrence in the mean and the max value of amount which is unusual but
+
+now there are no NaN values anymore '''
+
+now we will do the value count of product Country Channel Salesperson
+products = df['Product'].value_counts()
+country = df['Country'].value_counts()
+channel = df['Channel'].value_counts()
+salesman = df['Salesperson'].value_counts()
+
+
+print('THE product value count')
+print(products)
+
+print('--'*90)
+
+print('the  country value count')
+print(country)
+
+print('--'*90)
+
+print('THE channel value count')
+print(channel)
+
+print('--'*90)
+
+print('THE salesman and their number of sales')
+print(salesman)
+THE product value count
+Product
+70% Dark Bar            64800
+Truffle Gift Box        32295
+Mixed Assortment Box    21469
+Milk Classic Bar        16176
+Pralines Gift Box       12734
+Mint Dark Bar           10582
+Almond Crunch Bar        9199
+85% Dark Bar             8002
+White Choco Bar          7148
+Choco Coins Bag          6470
+Salted Caramel Bar       5802
+Hazelnut Milk Bar        5323
+Name: count, dtype: int64
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+the  country value count
+Country
+Australia    92594
+Brazil       52960
+Germany      25269
+India        17514
+Japan        11663
+Name: count, dtype: int64
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+THE channel value count
+Channel
+Retail       116505
+Wholesale     59244
+Online        24251
+Name: count, dtype: int64
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+THE salesman and their number of sales
+Salesperson
+Arjun Mehta        67589
+Priya Sharma       29328
+Emily Clarke       17792
+Lucas Walker       12517
+Rohan Patel         9766
+Yuki Sato           7810
+James Carter        6445
+Rafael Oliveira     5513
+Felix Becker        4838
+Haruto Tanaka       4194
+Camila Santos       3794
+Beatriz Souza       3412
+Henry Foster        3132
+Lukas Schmidt       2869
+Hannah Müller       2630
+Olivia Bennett      2393
+Michael Johnson     2330
+Gabriel Silva       2025
+Daniel Weber        2001
+Isabella Rossi      1862
+Sora Watanabe       1750
+Carlos Mendez       1589
+Sophie Dubois       1520
+Ananya Gupta        1493
+Laura Hoffmann      1408
+Name: count, dtype: int64
+this anlysis gives us the -
+most sold product is : 70% DARK BAR
+the country where our sales are highest is : AUSTRALIA
+most of chocolate are buyed with method : retail
+the saleperson with most sale is : ARJUN MEHTA
+THE GROUP BY NOW
+# average amount and discount of every Salesperson
+
+amount_avg = ((df.groupby('Salesperson')['Amount'].mean()).head(5)).sort_values(ascending = False)
+
+print('THE AVERAGE AMOUNT OF TOP 5 SALESPERSON : \n',amount_avg)
+
+print('--'*90)
+
+discount_avg = ((df.groupby('Salesperson')['Discount_Pct'].mean()).head(5)).sort_values(ascending = False)
+
+print('THE AVERAGE DISCOUNT TOP 5 SALESMAN IS GIVING :',discount_avg)
+
+print('--'*90)
+
+country_avg = ((df.groupby('Country')['Amount'].mean()).head(5)).sort_values(ascending = False)
+                                                            
+print('THE TOP 5 COUNTRIES AVERAGE AMOUNT : ',country_avg)
+THE AVERAGE AMOUNT OF TOP 5 SALESPERSON : 
+ Salesperson
+Ananya Gupta     512.713724
+Arjun Mehta      512.011118
+Camila Santos    507.850208
+Carlos Mendez    507.669006
+Beatriz Souza    507.421498
+Name: Amount, dtype: float64
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+THE AVERAGE DISCOUNT TOP 5 SALESMAN IS GIVING : Salesperson
+Ananya Gupta     13.379270
+Carlos Mendez    13.297873
+Arjun Mehta      13.141139
+Camila Santos    13.101165
+Beatriz Souza    13.040117
+Name: Discount_Pct, dtype: float64
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+THE TOP 5 COUNTRIES AVERAGE AMOUNT :  Country
+Brazil       687.519541
+Japan        484.165144
+Australia    457.655872
+Germany      449.073855
+India        371.401530
+Name: Amount, dtype: float64
+sales man selling with the largest amount is : ANANYA GUPTA
+SALESMAN SELLING WITH HIGHEST DISCOUNT IS : ANANYA GUPTA
+COUNTRY WITH THE TOP AMOUNT OF SALES IS : BRAZIL
+THE CORRELATION
+print(df.corr(numeric_only = True))
+                 Discount_Pct  Price_per_Box  Marketing_Spend  Boxes_Shipped  \
+Discount_Pct         1.000000      -0.030539         0.040500       0.176664   
+Price_per_Box       -0.030539       1.000000        -0.001239      -0.415590   
+Marketing_Spend      0.040500      -0.001239         1.000000       0.330476   
+Boxes_Shipped        0.176664      -0.415590         0.330476       1.000000   
+Amount               0.062890       0.258386         0.368227       0.600334   
+
+                   Amount  
+Discount_Pct     0.062890  
+Price_per_Box    0.258386  
+Marketing_Spend  0.368227  
+Boxes_Shipped    0.600334  
+Amount           1.000000  
+**
+
+SQL QUERY
+
+# Create a database file called 'chocolate.db'
+conn = sqlite3.connect('chocolate.db')
+
+# Push your Pandas data INTO the SQL database!
+df.to_sql('chocolate_sales', conn, index=False, if_exists='replace')
+
+print("Database created! You are now a SQL user.")
+
+# Query 1: Just get Brazil data (SELECT + FROM + WHERE)
+query3 = "SELECT Product, Amount FROM chocolate_sales WHERE Country = 'Brazil'"
+brazil_data = pd.read_sql_query(query3, conn)
+print(brazil_data.head())
+
+# Query 2: Get data where amount is GREATER than 1000 (Use > instead of =)
+query1 = "SELECT * FROM chocolate_sales WHERE Amount > 1000"
+big_sales = pd.read_sql_query(query1, conn)
+print(big_sales.head())
+
+# Query 3: The most used SQL in the world (GROUP BY)
+# This translates to: "Show me the AVERAGE amount for EACH country"
+
+query = 'SELECT Country,AVG(Amount) AS AVG_AMOUNT FROM chocolate_sales GROUP BY Country HAVING AVG_AMOUNT > 1000'
+print(pd.read_sql_query(query,conn))
+Database created! You are now a SQL user.
+                Product   Amount
+0          70% Dark Bar   527.01
+1      Truffle Gift Box   762.63
+2  Mixed Assortment Box  1545.89
+3     Hazelnut Milk Bar   607.38
+4          70% Dark Bar   411.12
+     Order_ID               Product Country    Channel    Salesperson  \
+0  ORD-075446  Mixed Assortment Box  Brazil     Retail      Yuki Sato   
+1  ORD-163369          70% Dark Bar  Brazil  Wholesale    Arjun Mehta   
+2  ORD-023419     Almond Crunch Bar  Brazil     Retail      Yuki Sato   
+3  ORD-063714  Mixed Assortment Box  Brazil     Retail  Sora Watanabe   
+4  ORD-049206      Truffle Gift Box  Brazil     Online    Arjun Mehta   
+
+   Order_Date  Discount_Pct  Price_per_Box  Marketing_Spend  Boxes_Shipped  \
+0  2023-07-18           0.5          19.05            68.08           77.0   
+1  2023-12-13          11.0           4.47            67.97          444.0   
+2  2022-06-03          28.8           2.59           341.57          576.0   
+3  2022-12-28           9.5           3.47            62.36          423.0   
+4  2023-11-24          17.8           3.26           110.95          428.0   
+
+    Amount  
+0  1545.89  
+1  1310.50  
+2  1067.20  
+3  1350.53  
+4  1128.06  
+Empty DataFrame
+Columns: [Country, AVG_AMOUNT]
+Index: []
+noe are the closest in positive
+none are perfect
+df['AVG_AMOUNT'] = df['Amount'].mean()
+PLOTTING AND SNS
+
+sns.histplot(data = df, x = df['Amount'])
+plt.xlabel('AMOUNT')
+plt.ylabel('Counts')
+plt.title('the amount')
+plt.show()
+
+THIS SHOWS THAT SMALL TRANSACTION OF AMOUNT HAVE VERY LARGE COUNT BUT OPPOSITE TO THE LARGE TRANSACTION
+plt.figure(figsize=(10, 6))
+# Seaborn will automatically calculate the MEAN Amount for each Salesperson
+sns.barplot(data=df, x='Amount', y='Salesperson', estimator='mean', errorbar=None, palette='coolwarm')
+plt.title('Average Sales Amount per Salesperson')
+plt.show()
+/tmp/ipykernel_16/1003394196.py:3: FutureWarning: 
+
+Passing `palette` without assigning `hue` is deprecated and will be removed in v0.14.0. Assign the `y` variable to `hue` and set `legend=False` for the same effect.
+
+  sns.barplot(data=df, x='Amount', y='Salesperson', estimator='mean', errorbar=None, palette='coolwarm')
+
+EVERYONE HAVE SAME AMOUNT OF AVERGE BUT WITH A VERY SMALL DIFFRENCE
+
+sns.barplot(data = df,x = df['Country'],y = df['Marketing_Spend'].mean(),estimator='mean', errorbar=None)
+plt.xlabel('COUNTRY')
+plt.ylabel('AVG Amount')
+plt.title('COUNTRY AND AVG AMOUNT')
+plt.show()
+
+THE COUNTRY WITH THE MOST CHOCOLATE SALES IS AUTSRALIA BUT THE COUNTRY WITH HIGHEST AMOUNT OF AVERAGE PRICE IS BRAZIL AND
+ANANYA GUPTA MADE THE MOST PROIT BUT ALSO GAVE THE HIGHEST DISCOUNT
+ARJUN MEHTA IS THE SALESPERSON WITH THE MOST SALES
+70% DARK CHOOLATE IS THE HIGHEST DEMANDED BRAND RIGHT NOW
+EVERY SALESPERSON HAVE ERY SMALL DIFFRENCE IN AVERAGE DSISCOUNT AND AMOUNT
